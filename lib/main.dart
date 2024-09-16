@@ -53,6 +53,7 @@ class _RestaurantCardsState extends State<RestaurantCards> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
+          surfaceTintColor: Colors.white,
           title: const Text(
             'Рестораны',
             style: TextStyle(fontFamily: 'Lora'),
@@ -75,9 +76,12 @@ class _RestaurantCardsState extends State<RestaurantCards> {
               ),
             ),
             Expanded(
-              child: ListView.builder(
-                itemCount: _restaurantCards.length,
-                itemBuilder: (context, index) => _restaurantCards[index],
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: ListView.builder(
+                  itemCount: _restaurantCards.length,
+                  itemBuilder: (context, index) => _restaurantCards[index],
+                ),
               ),
             ),
           ],
@@ -117,6 +121,8 @@ class _RestaurantCardsState extends State<RestaurantCards> {
 
   Card _createCardRestaurant(Restaurant res) {
     return Card(
+      elevation: 5,
+      surfaceTintColor: Colors.white,
       shape: ContinuousRectangleBorder(
         borderRadius: BorderRadius.circular(20),
       ),
