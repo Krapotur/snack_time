@@ -88,6 +88,9 @@ flutter:
     - family: Playfair
       fonts: 
         - asset: fonts/Playfair.ttf   
+    - family: Gilroy
+      fonts: 
+        - asset: fonts/Gilroy.ttf   
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

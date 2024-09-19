@@ -6,13 +6,14 @@ class CardRestaurant extends StatelessWidget {
   const CardRestaurant({
     super.key,
     required this.restaurant,
+    required this.kitchens,
   });
 
   final Restaurant restaurant;
+  final List<Kitchen> kitchens;
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     String url = 'http://10.101.11.31:5000/';
     return Card(
       elevation: 5,
@@ -34,9 +35,20 @@ class CardRestaurant extends StatelessWidget {
                   fit: BoxFit.cover),
             ),
           ),
-          InfoRestaurant(restaurant: restaurant, theme: theme),
+          InfoRestaurant(
+            restaurant: restaurant,
+            kitchen: _getKitchenTitle(),
+          ),
         ],
       ),
     );
+  }
+
+  String _getKitchenTitle() {
+    String title = '';
+    for (var kitchen in kitchens) {
+      if (restaurant.kitchen == kitchen.id) title = kitchen.title;
+    }
+    return title;
   }
 }

@@ -4,28 +4,26 @@ import 'package:snack_time/features/models/models.dart';
 class CardListView extends StatelessWidget {
   const CardListView({
     super.key,
-    required List<Widget> restaurantCards,
-    required List<Restaurant> restaurants,
-  })  : _restaurantCards = restaurantCards,
-        _restaurants = restaurants;
+    required this.restaurantCards,
+    required this.restaurants,
+  });
 
-  final List<Widget> _restaurantCards;
-  final List<Restaurant> _restaurants;
+  final List<Widget> restaurantCards;
+  final List<Restaurant> restaurants;
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-        child: ListView.builder(
-          itemCount: _restaurantCards.length,
-          itemBuilder: (context, i) => GestureDetector(
-            child: _restaurantCards[i],
-            onTap: () {
-              Navigator.of(context)
-                  .pushNamed('/restaurant', arguments: _restaurants[i]);
-            },
-          ),
+    return SliverPadding(
+      padding: const EdgeInsets.symmetric(horizontal: 8),
+      sliver: SliverList.separated(
+        itemCount: restaurantCards.length,
+        separatorBuilder: (context, i) => const SizedBox(height: 3),
+        itemBuilder: (context, i) => GestureDetector(
+          child: restaurantCards[i],
+          onTap: () {
+            Navigator.of(context)
+                .pushNamed('/restaurant', arguments: restaurants[i]);
+          },
         ),
       ),
     );

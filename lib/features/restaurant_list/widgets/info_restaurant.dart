@@ -5,14 +5,15 @@ class InfoRestaurant extends StatelessWidget {
   const InfoRestaurant({
     super.key,
     required this.restaurant,
-    required this.theme,
+    required this.kitchen,
   });
 
   final Restaurant restaurant;
-  final ThemeData theme;
+  final String kitchen;
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Padding(
       padding: const EdgeInsets.only(left: 8.0, top: 8, bottom: 15),
       child: SizedBox(
@@ -22,8 +23,7 @@ class InfoRestaurant extends StatelessWidget {
           children: [
             Text('Ресторан "${restaurant.title}"',
                 style: theme.textTheme.titleMedium),
-            Text('${restaurant.kitchen} кухня',
-                style: theme.textTheme.labelMedium),
+            Text('$kitchen кухня', style: theme.textTheme.labelMedium),
             Container(
               margin: const EdgeInsets.only(top: 5),
               height: 22,
