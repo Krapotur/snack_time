@@ -7,6 +7,8 @@ class RestaurantImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String url = 'http://10.101.11.31:5000/';
+
     return Padding(
       padding: const EdgeInsets.all(17.0),
       child: Container(
@@ -15,7 +17,7 @@ class RestaurantImage extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
           image: DecorationImage(
-              image: AssetImage(restaurant!.imgSrc), fit: BoxFit.cover),
+              image: NetworkImage(url + restaurant!.imgSrc), fit: BoxFit.cover),
         ),
       ),
     );

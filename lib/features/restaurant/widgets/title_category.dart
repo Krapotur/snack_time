@@ -18,9 +18,8 @@ class TitleCategory extends StatelessWidget {
       _categories[index],
       style: TextStyle(
           color: categoryTitle == _categories[index]
-              ? const Color.fromARGB(255, 250, 134, 1)
+              ? Theme.of(context).primaryColor
               : Colors.grey,
-          fontFamily: 'Lora',
           fontWeight: categoryTitle == _categories[index]
               ? FontWeight.bold
               : FontWeight.normal),

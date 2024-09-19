@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:snack_time/features/models/models.dart';
+import 'package:snack_time/features/restaurant_list/widgets/widgets.dart';
 
 class CardRestaurant extends StatelessWidget {
   const CardRestaurant({
     super.key,
-    required this.res,
+    required this.restaurant,
   });
 
-  final Restaurant res;
+  final Restaurant restaurant;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    String url = 'http://10.101.11.31:5000/';
     return Card(
       elevation: 5,
       surfaceTintColor: Colors.white,
@@ -28,52 +30,11 @@ class CardRestaurant extends StatelessWidget {
                 topRight: Radius.circular(8),
               ),
               image: DecorationImage(
-                  image: AssetImage(res.imgSrc), fit: BoxFit.cover),
+                  image: NetworkImage(url + restaurant.imgSrc),
+                  fit: BoxFit.cover),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 8.0, top: 8, bottom: 15),
-            child: SizedBox(
-              width: 350,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('Ресторан "${res.title}"',
-                      style: theme.textTheme.titleMedium),
-                  Text('${res.kitchen} кухня',
-                      style: theme.textTheme.labelMedium),
-                  Container(
-                    margin: const EdgeInsets.only(top: 5),
-                    height: 22,
-                    width: 52,
-                    decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 250, 134, 1),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8),
-                      child: Row(
-                        children: [
-                          const Icon(
-                            Icons.star,
-                            size: 15,
-                            color: Colors.white,
-                          ),
-                          Text(
-                            (res.raiting).toString(),
-                            style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 13,
-                                fontFamily: 'Lora'),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
+          InfoRestaurant(restaurant: restaurant, theme: theme),
         ],
       ),
     );

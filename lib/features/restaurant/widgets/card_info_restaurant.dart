@@ -25,7 +25,7 @@ class CardInfoRestaurant extends StatelessWidget {
                 height: 22,
                 width: 52,
                 decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 250, 134, 1),
+                  color: Theme.of(context).primaryColor,
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Padding(
@@ -38,11 +38,9 @@ class CardInfoRestaurant extends StatelessWidget {
                         color: Colors.white,
                       ),
                       Text(
-                        ('4.5').toString(),
-                        style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 13,
-                            fontFamily: 'Lora'),
+                        restaurant!.rating.toString(),
+                        style:
+                            const TextStyle(color: Colors.white, fontSize: 13),
                       ),
                     ],
                   ),
@@ -56,7 +54,7 @@ class CardInfoRestaurant extends StatelessWidget {
           style: Theme.of(context).textTheme.labelMedium,
         ),
         Text(
-          'Часы работы: 10:00 - 23:00',
+          'Часы работы: ${restaurant!.timeOpen} - ${restaurant!.timeClose}',
           style: Theme.of(context).textTheme.labelMedium,
         ),
         const SizedBox(

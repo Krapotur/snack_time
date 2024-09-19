@@ -54,9 +54,8 @@ class _CardCategoriesScrollState extends State<CardCategoriesScroll> {
                         widget.categories![index],
                         style: TextStyle(
                             color: categoryTitle == widget.categories![index]
-                                ? const Color.fromARGB(255, 250, 134, 1)
+                                ? Theme.of(context).primaryColor
                                 : Colors.grey,
-                            fontFamily: 'Lora',
                             fontWeight:
                                 categoryTitle == widget.categories![index]
                                     ? FontWeight.bold

@@ -22,8 +22,7 @@ class BottomNavBar extends StatelessWidget {
                 ),
                 Text(
                   'Рестораны',
-                  style: TextStyle(fontFamily: 'Lora'),
-                )
+                ),
               ],
             ),
             Column(
@@ -35,7 +34,7 @@ class BottomNavBar extends StatelessWidget {
                 ),
                 Text(
                   'Корзина',
-                  style: TextStyle(fontFamily: 'Lora', color: Colors.grey),
+                  style: TextStyle(color: Colors.grey),
                 ),
               ],
             ),
@@ -48,7 +47,7 @@ class BottomNavBar extends StatelessWidget {
                 ),
                 Text(
                   'Профиль',
-                  style: TextStyle(fontFamily: 'Lora', color: Colors.grey),
+                  style: TextStyle(color: Colors.grey),
                 ),
               ],
             ),
@@ -58,4 +57,3 @@ class BottomNavBar extends StatelessWidget {
     );
   }
 }
-

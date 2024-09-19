@@ -1,11 +1,25 @@
-import 'package:snack_time/features/models/position.dart';
-
 class Restaurant {
-  final String title;
-  final String kitchen;
-  final double raiting;
-  final String imgSrc;
-  final List<Position> positions;
+  String? id;
+  bool? status;
+  String title;
+  String description;
+  double rating;
+  String typePlace;
+  String kitchen;
+  String imgSrc;
+  String timeOpen;
+  String timeClose;
 
-   Restaurant(this.title, this.kitchen, this.raiting, this.imgSrc, this.positions);
+  Restaurant({
+    required this.id,
+    required this.status,
+    required this.title,
+    required this.description,
+    required this.rating,
+    required this.typePlace,
+    required this.kitchen,
+    required this.imgSrc,
+    required this.timeOpen,
+    required this.timeClose,
+  });
 }

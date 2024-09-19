@@ -32,13 +32,10 @@ class RestaurantScreenState extends State<RestaurantScreen> {
     super.didChangeDependencies();
   }
 
-  void _callSetState() {
-    print('From parent sssssssssssssssssssssssssssssss');
-    setState(() {});
-  }
-
   @override
   Widget build(BuildContext context) {
+    String url = 'http://10.101.11.31:5000/';
+
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 253, 249, 249),
       body: Container(
@@ -46,7 +43,7 @@ class RestaurantScreenState extends State<RestaurantScreen> {
         decoration: BoxDecoration(
           image: DecorationImage(
               alignment: Alignment.topCenter,
-              image: AssetImage(restaurant!.imgSrc),
+              image: NetworkImage(url + restaurant!.imgSrc),
               fit: BoxFit.fitWidth),
         ),
         child: Padding(
