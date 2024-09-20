@@ -21,9 +21,13 @@ class InfoRestaurant extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Ресторан "${restaurant.title}"',
+            Text(
+                '${restaurant.typePlace == 'restaurant' ? 'Ресторан' : 'Кафе'} "${restaurant.title}"',
                 style: theme.textTheme.titleMedium),
-            Text('$kitchen кухня', style: theme.textTheme.labelMedium),
+            Text(
+              '$kitchen кухня',
+              style: theme.textTheme.labelMedium,
+            ),
             Container(
               margin: const EdgeInsets.only(top: 5),
               height: 22,

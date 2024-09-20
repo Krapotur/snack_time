@@ -1,5 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:snack_time/features/models/models.dart';
+import 'package:snack_time/router/router.gr.dart';
 
 class CardListView extends StatelessWidget {
   const CardListView({
@@ -21,8 +23,8 @@ class CardListView extends StatelessWidget {
         itemBuilder: (context, i) => GestureDetector(
           child: restaurantCards[i],
           onTap: () {
-            Navigator.of(context)
-                .pushNamed('/restaurant', arguments: restaurants[i]);
+            AutoRouter.of(context)
+                .push(RestaurantRoute(restaurant: restaurants[i]));
           },
         ),
       ),

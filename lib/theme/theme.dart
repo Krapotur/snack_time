@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 
 final primaryTheme = ThemeData(
   useMaterial3: true,
-  scaffoldBackgroundColor: Colors.white,
+  cardColor: Colors.white,
+  scaffoldBackgroundColor: const Color.fromARGB(239, 255, 255, 255),
   primaryColor: const Color.fromARGB(255, 233, 123, 39),
+  highlightColor: const Color.fromARGB(255, 212, 212, 212),
   colorScheme:
       ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 233, 123, 39)),
   appBarTheme: const AppBarTheme(backgroundColor: Colors.white),
@@ -11,8 +13,8 @@ final primaryTheme = ThemeData(
   textTheme: const TextTheme(
     titleMedium: TextStyle(
       fontSize: 17,
-      fontWeight: FontWeight.bold,
+      fontWeight: FontWeight.w600,
     ),
-    labelMedium: TextStyle(color: Colors.grey, fontSize: 13),
+    labelMedium: TextStyle(fontSize: 13, color: Colors.grey),
   ),
 );

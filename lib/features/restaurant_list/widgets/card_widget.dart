@@ -17,6 +17,7 @@ class CardRestaurant extends StatelessWidget {
     String url = 'http://10.101.11.31:5000/';
     return Card(
       elevation: 5,
+      color: Colors.white,
       surfaceTintColor: Colors.white,
       shape: ContinuousRectangleBorder(
         borderRadius: BorderRadius.circular(20),

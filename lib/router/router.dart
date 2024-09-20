@@ -1,7 +1,14 @@
-import 'package:snack_time/features/restaurant/view/restaurant_screen.dart';
-import 'package:snack_time/features/restaurant_list/view/restaurant_list_screen.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:snack_time/router/router.gr.dart';
 
-final routes = {
-  ('/'): (context) => const RestaurantListScreen(),
-  ('/restaurant'): (context) => const RestaurantScreen(),
-};
+@AutoRouterConfig()
+class AppRouter extends RootStackRouter {
+  @override
+  List<AutoRoute> get routes => [
+        AutoRoute(path: '/', page: HomeRoute.page, children: [
+          AutoRoute(path: 'restaurantList', page: RestaurantListRoute.page),
+          AutoRoute(path: 'profile', page: ProfileRoute.page),
+        ]),
+        AutoRoute(path: '/restaurant', page: RestaurantRoute.page),
+      ];
+}

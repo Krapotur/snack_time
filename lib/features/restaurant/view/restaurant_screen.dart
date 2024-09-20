@@ -1,16 +1,18 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:snack_time/features/models/models.dart';
 import 'package:snack_time/features/restaurant/widgets/widgets.dart';
 
+@RoutePage()
 class RestaurantScreen extends StatefulWidget {
-  const RestaurantScreen({super.key});
+  const RestaurantScreen({super.key, required this.restaurant});
 
+  final Restaurant restaurant;
   @override
   State<RestaurantScreen> createState() => RestaurantScreenState();
 }
 
 class RestaurantScreenState extends State<RestaurantScreen> {
-  Restaurant? restaurant;
   String categoryTitle = 'Горячие блюда';
 
   final List<String> _categories = [
@@ -23,16 +25,6 @@ class RestaurantScreenState extends State<RestaurantScreen> {
   ];
 
   @override
-  void didChangeDependencies() {
-    final args = ModalRoute.of(context)?.settings.arguments;
-    assert(args != null && args is Restaurant,
-        'You must provide Object Restaurant args');
-
-    restaurant = args as Restaurant;
-    super.didChangeDependencies();
-  }
-
-  @override
   Widget build(BuildContext context) {
     String url = 'http://10.101.11.31:5000/';
 
@@ -43,7 +35,7 @@ class RestaurantScreenState extends State<RestaurantScreen> {
         decoration: BoxDecoration(
           image: DecorationImage(
               alignment: Alignment.topCenter,
-              image: NetworkImage(url + restaurant!.imgSrc),
+              image: NetworkImage(url + widget.restaurant.imgSrc),
               fit: BoxFit.fitWidth),
         ),
         child: Padding(
@@ -54,16 +46,18 @@ class RestaurantScreenState extends State<RestaurantScreen> {
               Padding(
                 padding: const EdgeInsets.only(top: 60.0, bottom: 10),
                 child: Card(
+                  color: Colors.white,
                   surfaceTintColor: Colors.white,
                   child: Row(
                     children: [
-                      RestaurantImage(restaurant: restaurant),
-                      CardInfoRestaurant(restaurant: restaurant),
+                      RestaurantImage(restaurant: widget.restaurant),
+                      CardInfoRestaurant(restaurant: widget.restaurant),
                     ],
                   ),
                 ),
               ),
               Card(
+                color: Colors.white,
                 surfaceTintColor: Colors.white,
                 child: SizedBox(
                   height: 50,

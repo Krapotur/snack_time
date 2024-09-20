@@ -7,10 +7,11 @@ class SnackTimeApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    final appRouter = AppRouter();
+    return MaterialApp.router(
       theme: primaryTheme,
       debugShowCheckedModeBanner: false,
-      routes: routes,
+      routerConfig: appRouter.config(),
     );
   }
 }
