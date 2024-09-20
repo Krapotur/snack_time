@@ -16,7 +16,7 @@ class RestaurantListScreen extends StatefulWidget {
 class _RestaurantListScreenState extends State<RestaurantListScreen> {
   List<Restaurant> _restaurants = [];
   List<Kitchen> _kitchens = [];
-  final List<Widget> _restaurantCards = [];
+  List<Widget> _restaurantCards = [];
   late String title = _kitchens[0].title;
 
   void _getRestaurantList() async {
@@ -104,7 +104,7 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
         onPressed: () {
           setState(() {
             title = kitchen.title;
-            _filterCardByKitcchen(kitchen);
+            _filterCardByKitchen(kitchen);
           });
         },
         child: Text(
@@ -145,5 +145,15 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
     setState(() {});
   }
 
-  void _filterCardByKitcchen(Kitchen kitchen) {}
+  void _filterCardByKitchen(Kitchen kitchen) {
+    _restaurantCards = [];
+    List<Restaurant> filteredList = [];
+
+    for (var restaurant in _restaurants) {
+      if (restaurant.kitchen == kitchen.id) filteredList.add(restaurant);
+    }
+
+    _getCardsRestaurant(
+        filteredList.isEmpty ? _restaurants : filteredList, _kitchens);
+  }
 }
