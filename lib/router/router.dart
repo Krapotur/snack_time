@@ -7,6 +7,7 @@ class AppRouter extends RootStackRouter {
   List<AutoRoute> get routes => [
         AutoRoute(path: '/', page: HomeRoute.page, children: [
           AutoRoute(path: 'restaurantList', page: RestaurantListRoute.page),
+          AutoRoute(path: 'basket', page: BasketRoute.page),
           AutoRoute(path: 'profile', page: ProfileRoute.page),
         ]),
         AutoRoute(path: '/restaurant', page: RestaurantRoute.page),
