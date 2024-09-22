@@ -24,6 +24,10 @@ class _BasketScreenState extends State<BasketScreen> {
           child: const Column(
             children: [
               InfoAbotDelivery(),
+              Divider(
+                color: Colors.grey,
+                thickness: 0.2,
+              ),
               BottomNavbar(),
             ],
           ),

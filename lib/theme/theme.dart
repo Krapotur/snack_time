@@ -10,6 +10,7 @@ final primaryTheme = ThemeData(
       ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 233, 123, 39)),
   appBarTheme: const AppBarTheme(backgroundColor: Colors.white),
   fontFamily: 'Gilroy',
+  dividerTheme: const DividerThemeData(thickness: 0.2, color: Colors.grey),
   textTheme: const TextTheme(
     titleMedium: TextStyle(
       fontSize: 17,

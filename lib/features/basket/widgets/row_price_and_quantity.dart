@@ -7,15 +7,14 @@ class RowPriceAndQuantity extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     return SizedBox(
       width: double.infinity,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
+          const Text(
             '600р',
-            style: theme.textTheme.titleLarge,
+            style: TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
           ),
           Container(
             height: 25,

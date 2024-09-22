@@ -17,7 +17,19 @@ class InfoAbotDelivery extends StatelessWidget {
             children: [
               Text('3 товара'),
               Text('Бонусы'),
-              Text('Доставка'),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text('Доставка'),
+                  SizedBox(
+                    width: 2,
+                  ),
+                  Icon(
+                    Icons.directions_run,
+                    size: 15,
+                  ),
+                ],
+              ),
             ],
           ),
           Column(

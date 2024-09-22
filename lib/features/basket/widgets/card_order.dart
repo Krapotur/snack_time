@@ -8,7 +8,6 @@ class CardOrder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -30,17 +29,20 @@ class CardOrder extends StatelessWidget {
                 const SizedBox(
                   width: 17,
                 ),
-                Column(
+                const Column(
+                  mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                      'Плов',
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                    Text(
+                      'Шашлык с бараниной',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 16,
+                      ),
                     ),
                     Text(
                       '180 г',
-                      style: theme.textTheme.titleMedium,
+                      style: TextStyle(fontSize: 14, color: Colors.grey),
                     ),
                   ],
                 ),
