@@ -13,55 +13,22 @@ class BasketScreen extends StatefulWidget {
 class _BasketScreenState extends State<BasketScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: CustomScrollView(
-        slivers: [
-          const BasketAppBar(),
-          SliverPadding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0),
-            sliver: SliverList.separated(
-              itemCount: 3,
-              separatorBuilder: (context, i) => const Divider(),
-              itemBuilder: (context, i) => Container(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: const CardOrder(),
-              ),
-            ),
+    return Column(
+      children: [
+        const AppbarOrder(),
+        const CardsList(),
+        Container(
+          width: double.infinity,
+          padding: const EdgeInsets.only(bottom: 5),
+          decoration: const BoxDecoration(color: Colors.white),
+          child: const Column(
+            children: [
+              InfoAbotDelivery(),
+              BottomNavbar(),
+            ],
           ),
-          const SliverToBoxAdapter(child: Divider()),
-          const InputPromocode(),
-
-          SliverToBoxAdapter(
-            child: Container(
-              padding: const EdgeInsets.all(15),
-              child: const Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('3 товара'),
-                      Text('Бонусы'),
-                      Text('Доставка'),
-                    ],
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Text('1800 Р'),
-                      Text('+25'),
-                      Text('Бесплатно'),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          )
-          // const InfoAbotDelivery(),
-        ],
-      ),
-      bottomNavigationBar: const BottomNavbar(),
+        )
+      ],
     );
   }
 }

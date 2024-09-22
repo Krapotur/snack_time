@@ -28,7 +28,7 @@ class CardOrder extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(
-                  width: 20,
+                  width: 17,
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
