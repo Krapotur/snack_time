@@ -1,11 +1,17 @@
 import 'package:dio/dio.dart';
 import 'package:snack_time/features/models/models.dart';
+import 'package:snack_time/repositories/abstract_restaurants_repository.dart';
 
-class RestaurantsRepository {
+class RestaurantsRepository implements AbstractRestaurantsRepository {
+  RestaurantsRepository({required this.dio});
+
+  final Dio dio;
+
+  @override
   Future<List<Restaurant>> getRestaurantsList() async {
     List<Restaurant> restaurantList = [];
-    final response =
-        await Dio().get('http://10.101.11.31:5000/api/restaurants');
+
+    final response = await dio.get('http://10.101.11.31:5000/api/restaurants');
     final dataList = response.data;
 
     for (var e in dataList) {

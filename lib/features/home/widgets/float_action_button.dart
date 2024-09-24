@@ -23,12 +23,9 @@ class FloatActionButton extends StatelessWidget {
           ),
         ),
       },
-      child: const SizedBox(
-        width: 75,
-        child: Text(
-          'Корзина(3)',
-          style: TextStyle(color: Colors.white),
-        ),
+      child: const Text(
+        'Корзина(3)',
+        style: TextStyle(color: Colors.white),
       ),
     );
   }

@@ -14,9 +14,9 @@ class CardsList extends StatelessWidget {
         child: CustomScrollView(
           slivers: [
             SliverPadding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              padding: const EdgeInsets.only(bottom: 8.0),
               sliver: SliverList.separated(
-                itemCount: 3,
+                itemCount: 5,
                 separatorBuilder: (context, i) => const Divider(
                   color: Colors.grey,
                   thickness: 0.2,

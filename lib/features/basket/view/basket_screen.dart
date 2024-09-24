@@ -16,6 +16,11 @@ class _BasketScreenState extends State<BasketScreen> {
     return Column(
       children: [
         const AppbarOrder(),
+        const Divider(
+          color: Colors.grey,
+          height: 0.2,
+          thickness: 0.2,
+        ),
         const CardsList(),
         Container(
           width: double.infinity,

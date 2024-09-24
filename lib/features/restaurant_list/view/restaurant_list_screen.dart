@@ -1,9 +1,12 @@
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:snack_time/features/models/models.dart';
+import 'package:snack_time/features/restaurant_list/bloc/restaurant_list_bloc.dart';
 import 'package:snack_time/features/restaurant_list/widgets/widgets.dart';
-import 'package:snack_time/repositories/kitchens_repository.dart';
-import 'package:snack_time/repositories/restaurants_repository.dart';
+import 'package:snack_time/repositories/abstract_restaurants_repository.dart';
+import 'package:snack_time/repositories/kitchens/kitchens_repository.dart';
 
 @RoutePage()
 class RestaurantListScreen extends StatefulWidget {
@@ -14,17 +17,20 @@ class RestaurantListScreen extends StatefulWidget {
 }
 
 class _RestaurantListScreenState extends State<RestaurantListScreen> {
+  final _restaurantListBloc =
+      RestaurantListBloc(GetIt.I<AbstractRestaurantsRepository>());
   List<Restaurant> _restaurants = [];
   List<Kitchen> _kitchens = [];
   List<Widget> _restaurantCards = [];
   late String title = _kitchens[0].title;
 
   void _getRestaurantList() async {
-    _restaurants = await RestaurantsRepository().getRestaurantsList();
+    // _restaurants =
+    //     await GetIt.I<AbstractRestaurantsRepository>().getRestaurantsList();
     _kitchens = await KitchenssRepository().getKitchensList();
 
-    _getCardsRestaurant(_restaurants, _kitchens);
-    _getKitchenTitleFromList(_restaurants, _kitchens);
+    _getCardsRestaurant(_kitchens);
+    _getKitchenTitleFromList(_kitchens);
   }
 
   @override
@@ -36,56 +42,65 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            automaticallyImplyLeading: false,
-            title: const Text('Рестораны',
-                style: TextStyle(fontWeight: FontWeight.w600)),
-            centerTitle: true,
-            pinned: true,
-            snap: true,
-            floating: true,
-            surfaceTintColor: Colors.white,
-            bottom: _kitchens.isEmpty
-                ? const PreferredSize(
-                    preferredSize: Size.fromHeight(1), child: SizedBox())
-                : PreferredSize(
-                    preferredSize: const Size.fromHeight(73),
-                    child: Padding(
-                      padding: const EdgeInsets.only(bottom: 8.0),
-                      child: Column(
-                        children: [
-                          const Text('Выберите кухню'),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          SizedBox(
-                            height: 40,
-                            child: ListView.separated(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 8),
-                              scrollDirection: Axis.horizontal,
-                              itemCount: _kitchens.length,
-                              separatorBuilder: (context, i) =>
-                                  const SizedBox(),
-                              itemBuilder: (context, index) => _kitchens.isEmpty
-                                  ? const SizedBox()
-                                  : _kitchenButtons(
-                                      _kitchens[index],
-                                    ),
+      body: BlocBuilder<RestaurantListBloc, RestaurantListState>(
+        bloc: _restaurantListBloc,
+        builder: (context, state) {
+          if (state is RestaurantListLoaded) {
+            _restaurants = state.restaurantList;
+            CustomScrollView(
+              slivers: [
+                SliverAppBar(
+                  automaticallyImplyLeading: false,
+                  title: const Text('Рестораны',
+                      style: TextStyle(fontWeight: FontWeight.w600)),
+                  centerTitle: true,
+                  pinned: true,
+                  snap: true,
+                  floating: true,
+                  surfaceTintColor: Colors.white,
+                  bottom: _kitchens.isEmpty
+                      ? const PreferredSize(
+                          preferredSize: Size.fromHeight(1), child: SizedBox())
+                      : PreferredSize(
+                          preferredSize: const Size.fromHeight(73),
+                          child: Padding(
+                            padding: const EdgeInsets.only(bottom: 8.0),
+                            child: Column(
+                              children: [
+                                const Text('Выберите кухню'),
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                SizedBox(
+                                  height: 40,
+                                  child: ListView.separated(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 8),
+                                    scrollDirection: Axis.horizontal,
+                                    itemCount: _kitchens.length,
+                                    separatorBuilder: (context, i) =>
+                                        const SizedBox(),
+                                    itemBuilder: (context, index) =>
+                                        _kitchens.isEmpty
+                                            ? const SizedBox()
+                                            : _kitchenButtons(
+                                                _kitchens[index],
+                                              ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                        ],
-                      ),
-                    ),
-                  ),
-          ),
-          _restaurants.isEmpty
-              ? const CircularIndicator()
-              : CardListView(
-                  restaurantCards: _restaurantCards, restaurants: _restaurants),
-        ],
+                        ),
+                ),
+                CardListView(
+                    restaurantCards: _restaurantCards,
+                    restaurants: _restaurants),
+              ],
+            );
+          }
+          return const CircularIndicator();
+        },
       ),
     );
   }
@@ -115,9 +130,8 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
     );
   }
 
-  void _getCardsRestaurant(
-      List<Restaurant> restaurantList, List<Kitchen> kitchens) {
-    for (var res in restaurantList) {
+  void _getCardsRestaurant(List<Kitchen> kitchens) {
+    for (var res in _restaurants) {
       _restaurantCards.add(_createCardRestaurant(res, kitchens));
     }
   }
@@ -126,13 +140,12 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
     return CardRestaurant(restaurant: restaurant, kitchens: kitchens);
   }
 
-  void _getKitchenTitleFromList(
-      List<Restaurant> restaurantList, List<Kitchen> kitchenList) {
+  void _getKitchenTitleFromList(List<Kitchen> kitchenList) {
     final List<Kitchen> kitchenListActive = [
       const Kitchen(id: 'id', title: 'Все', imgSrc: '')
     ];
 
-    for (var restaurant in restaurantList) {
+    for (var restaurant in _restaurants) {
       for (var kitchen in kitchenList) {
         if (restaurant.kitchen == kitchen.id &&
             !kitchenListActive.contains(kitchen)) {
@@ -153,7 +166,6 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
       if (restaurant.kitchen == kitchen.id) filteredList.add(restaurant);
     }
 
-    _getCardsRestaurant(
-        filteredList.isEmpty ? _restaurants : filteredList, _kitchens);
+    _getCardsRestaurant(_kitchens);
   }
 }
