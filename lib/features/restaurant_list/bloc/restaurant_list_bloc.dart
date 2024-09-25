@@ -10,8 +10,13 @@ class RestaurantListBloc
   RestaurantListBloc(this.restaurantsRepository)
       : super(RestaurantListInitial()) {
     on<LoadingRestaurantList>((event, emit) async {
-      final restaurants = await restaurantsRepository.getRestaurantsList();
-      emit(RestaurantListLoaded(restaurantList: restaurants));
+      try {
+        emit(RestaurantListLoading());
+        final restaurants = await restaurantsRepository.getRestaurantsList();
+        emit(RestaurantListLoaded(restaurantList: restaurants));
+      } catch (e) {
+        emit(RestaurantListFailure(error: e));
+      }
     });
   }
   final AbstractRestaurantsRepository restaurantsRepository;

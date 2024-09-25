@@ -11,3 +11,9 @@ class RestaurantListLoaded extends RestaurantListState {
 
   RestaurantListLoaded({required this.restaurantList});
 }
+
+class RestaurantListFailure extends RestaurantListState {
+  final Object error;
+
+  RestaurantListFailure({required this.error});
+}

@@ -1,12 +1,11 @@
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
 import 'package:snack_time/features/models/models.dart';
 import 'package:snack_time/features/restaurant_list/bloc/restaurant_list_bloc.dart';
 import 'package:snack_time/features/restaurant_list/widgets/widgets.dart';
-import 'package:snack_time/repositories/abstract_restaurants_repository.dart';
 import 'package:snack_time/repositories/kitchens/kitchens_repository.dart';
+import 'package:snack_time/ui/shared/widgets/loading_failure_widget.dart';
 
 @RoutePage()
 class RestaurantListScreen extends StatefulWidget {
@@ -17,8 +16,6 @@ class RestaurantListScreen extends StatefulWidget {
 }
 
 class _RestaurantListScreenState extends State<RestaurantListScreen> {
-  final _restaurantListBloc =
-      RestaurantListBloc(GetIt.I<AbstractRestaurantsRepository>());
   List<Restaurant> _restaurants = [];
   List<Kitchen> _kitchens = [];
   List<Widget> _restaurantCards = [];
@@ -42,65 +39,68 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocBuilder<RestaurantListBloc, RestaurantListState>(
-        bloc: _restaurantListBloc,
-        builder: (context, state) {
-          if (state is RestaurantListLoaded) {
-            _restaurants = state.restaurantList;
-            CustomScrollView(
-              slivers: [
-                SliverAppBar(
-                  automaticallyImplyLeading: false,
-                  title: const Text('Рестораны',
-                      style: TextStyle(fontWeight: FontWeight.w600)),
-                  centerTitle: true,
-                  pinned: true,
-                  snap: true,
-                  floating: true,
-                  surfaceTintColor: Colors.white,
-                  bottom: _kitchens.isEmpty
-                      ? const PreferredSize(
-                          preferredSize: Size.fromHeight(1), child: SizedBox())
-                      : PreferredSize(
-                          preferredSize: const Size.fromHeight(73),
-                          child: Padding(
-                            padding: const EdgeInsets.only(bottom: 8.0),
-                            child: Column(
-                              children: [
-                                const Text('Выберите кухню'),
-                                const SizedBox(
-                                  height: 5,
-                                ),
-                                SizedBox(
-                                  height: 40,
-                                  child: ListView.separated(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 8),
-                                    scrollDirection: Axis.horizontal,
-                                    itemCount: _kitchens.length,
-                                    separatorBuilder: (context, i) =>
-                                        const SizedBox(),
-                                    itemBuilder: (context, index) =>
-                                        _kitchens.isEmpty
-                                            ? const SizedBox()
-                                            : _kitchenButtons(
-                                                _kitchens[index],
-                                              ),
-                                  ),
-                                ),
-                              ],
+      body: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            automaticallyImplyLeading: false,
+            title: const Text('Рестораны',
+                style: TextStyle(fontWeight: FontWeight.w600)),
+            centerTitle: true,
+            pinned: true,
+            snap: true,
+            floating: true,
+            surfaceTintColor: Colors.white,
+            bottom: _kitchens.isEmpty
+                ? const PreferredSize(
+                    preferredSize: Size.fromHeight(1), child: SizedBox())
+                : PreferredSize(
+                    preferredSize: const Size.fromHeight(73),
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 8.0),
+                      child: Column(
+                        children: [
+                          const Text('Выберите кухню'),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          SizedBox(
+                            height: 40,
+                            child: ListView.separated(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 8),
+                              scrollDirection: Axis.horizontal,
+                              itemCount: _kitchens.length,
+                              separatorBuilder: (context, i) =>
+                                  const SizedBox(),
+                              itemBuilder: (context, index) => _kitchens.isEmpty
+                                  ? const SizedBox()
+                                  : _kitchenButtons(
+                                      _kitchens[index],
+                                    ),
                             ),
                           ),
-                        ),
-                ),
-                CardListView(
-                    restaurantCards: _restaurantCards,
-                    restaurants: _restaurants),
-              ],
-            );
-          }
-          return const CircularIndicator();
-        },
+                        ],
+                      ),
+                    ),
+                  ),
+          ),
+          BlocBuilder<RestaurantListBloc, RestaurantListState>(
+              bloc: BlocProvider.of<RestaurantListBloc>(context),
+              builder: (context, state) {
+                if (state is RestaurantListFailure) {
+                  const LoadingFailureWidget();
+                }
+                if (state is RestaurantListLoaded) {
+                  _restaurants = state.restaurantList;
+                  CardListView(
+                      restaurantCards: _restaurantCards,
+                      restaurants: _restaurants);
+                }
+                return const SliverFillRemaining(
+                  child: Center(child: CircularProgressIndicator()),
+                );
+              }),
+        ],
       ),
     );
   }

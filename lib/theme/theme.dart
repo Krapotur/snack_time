@@ -6,6 +6,8 @@ final primaryTheme = ThemeData(
   scaffoldBackgroundColor: const Color.fromARGB(239, 255, 255, 255),
   primaryColor: const Color.fromARGB(255, 233, 123, 39),
   highlightColor: const Color.fromARGB(255, 212, 212, 212),
+  progressIndicatorTheme: const ProgressIndicatorThemeData(
+      color: Color.fromARGB(255, 233, 123, 39)),
   colorScheme:
       ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 233, 123, 39)),
   appBarTheme: const AppBarTheme(backgroundColor: Colors.white),

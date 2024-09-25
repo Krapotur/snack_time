@@ -15,9 +15,9 @@ class CardListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return SliverPadding(
       padding: const EdgeInsets.symmetric(horizontal: 8),
-      child: ListView.separated(
+      sliver: SliverList.separated(
         itemCount: restaurantCards.length,
         separatorBuilder: (context, i) => const SizedBox(height: 3),
         itemBuilder: (context, i) => GestureDetector(
