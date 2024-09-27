@@ -21,7 +21,7 @@ class LoadingFailureWidget extends StatelessWidget {
             height: 10,
           ),
           Text(
-            'Пропало соединение с интернетом,',
+            'Сервер недоступен.',
             style: TextStyle(
                 fontFamily: 'Playfair',
                 fontSize: 15,
@@ -29,7 +29,7 @@ class LoadingFailureWidget extends StatelessWidget {
                 color: Colors.grey.shade700.withOpacity(0.8)),
           ),
           Text(
-            'проверьте ваше подключение к сети',
+            'Проверьте подключение к Интернету',
             style: TextStyle(
                 fontFamily: 'Playfair',
                 fontSize: 15,
@@ -46,7 +46,7 @@ class LoadingFailureWidget extends StatelessWidget {
             ),
             onPressed: () => {
               BlocProvider.of<RestaurantListBloc>(context)
-                  .add(LoadingRestaurantList()),
+                  .add(SearchRestaurantList()),
             },
           ),
         ],

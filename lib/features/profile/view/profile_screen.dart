@@ -50,9 +50,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
               padding: const EdgeInsets.only(left: 15, top: 20, right: 15),
               scrollDirection: Axis.horizontal,
               children: [
-                const BaseContainer(
-                  color: Colors.orange,
-                  child: Column(
+                BaseContainer(
+                  color: Theme.of(context).primaryColor,
+                  child: const Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

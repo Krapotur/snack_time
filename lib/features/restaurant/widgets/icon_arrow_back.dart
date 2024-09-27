@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:snack_time/router/router.gr.dart';
 
 class IconArrowBack extends StatelessWidget {
   const IconArrowBack({
@@ -14,7 +13,7 @@ class IconArrowBack extends StatelessWidget {
       child: Align(
         alignment: Alignment.centerLeft,
         child: GestureDetector(
-          onTap: () => AutoRouter.of(context).push(const HomeRoute()),
+          onTap: () => AutoRouter.of(context).back(),
           child: Container(
             width: 40,
             decoration: BoxDecoration(
