@@ -94,9 +94,13 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
                   restaurantsList: state.restaurantList,
                   kitchensList: state.kitchenList);
             }
+            if (state is LoadingFailureWidget) {
+              return const SliverFillRemaining(
+                child: LoadingFailureWidget(),
+              );
+            }
             return const SliverFillRemaining(
-              child: LoadingFailureWidget(),
-            );
+                child: Center(child: CircularProgressIndicator()));
           },
         )
       ],
