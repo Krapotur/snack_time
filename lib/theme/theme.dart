@@ -5,7 +5,7 @@ final primaryTheme = ThemeData(
   cardColor: Colors.white,
   scaffoldBackgroundColor: const Color.fromARGB(239, 255, 255, 255),
   primaryColor: const Color.fromARGB(255, 233, 123, 39),
-  highlightColor: const Color.fromARGB(255, 212, 212, 212),
+  hintColor: Colors.grey,
   progressIndicatorTheme: const ProgressIndicatorThemeData(
       color: Color.fromARGB(255, 233, 123, 39)),
   colorScheme:

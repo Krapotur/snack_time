@@ -37,16 +37,16 @@ class LoadingFailureWidget extends StatelessWidget {
                 color: Colors.grey.shade700.withOpacity(0.8)),
           ),
           TextButton(
-            child: const Text(
+            child: Text(
               'Попробовать снова',
               style: TextStyle(
                   fontFamily: 'Playfair',
                   fontSize: 17,
-                  color: Color.fromARGB(255, 233, 123, 39)),
+                  color: Theme.of(context).primaryColor),
             ),
             onPressed: () => {
               BlocProvider.of<RestaurantListBloc>(context)
-                  .add(SearchRestaurantList()),
+                  .add(SearchRestaurantList(completer: null)),
             },
           ),
         ],

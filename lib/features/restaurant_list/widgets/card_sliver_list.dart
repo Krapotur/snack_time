@@ -22,8 +22,9 @@ class CardSliverList extends StatelessWidget {
       itemCount: restaurantsList.length,
       itemBuilder: (context, i) => GestureDetector(
         onTap: () {
-          AutoRouter.of(context)
-              .push(RestaurantRoute(restaurant: restaurantsList[i]));
+          AutoRouter.of(context).push(RestaurantRoute(
+              restaurant: restaurantsList[i],
+              kitchenTitle: _getKitchenTitle(restaurantsList[i])));
         },
         child: Card(
           elevation: 5,

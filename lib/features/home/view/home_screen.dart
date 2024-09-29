@@ -16,7 +16,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
-    BlocProvider.of<RestaurantListBloc>(context).add(SearchRestaurantList());
+    BlocProvider.of<RestaurantListBloc>(context)
+        .add(SearchRestaurantList(completer: null));
 
     super.initState();
   }

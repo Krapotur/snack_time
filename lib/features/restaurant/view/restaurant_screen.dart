@@ -7,9 +7,12 @@ import 'package:snack_time/features/restaurant_list/bloc/restaurant_list_bloc.da
 
 @RoutePage()
 class RestaurantScreen extends StatefulWidget {
-  const RestaurantScreen({super.key, required this.restaurant});
+  const RestaurantScreen(
+      {super.key, required this.restaurant, required this.kitchenTitle});
 
   final Restaurant restaurant;
+  final String kitchenTitle;
+
   @override
   State<RestaurantScreen> createState() => RestaurantScreenState();
 }
@@ -33,58 +36,54 @@ class RestaurantScreenState extends State<RestaurantScreen> {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          SliverAppBar(
-            automaticallyImplyLeading: true,
-            surfaceTintColor: Colors.white,
-            backgroundColor: Colors.white,
-            pinned: false,
-            floating: false,
-            expandedHeight: 160,
-            flexibleSpace: FlexibleSpaceBar(
-              background: DecoratedBox(
-                position: DecorationPosition.foreground,
-                decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.bottomCenter,
-                    end: Alignment.center,
-                    colors: <Color>[Colors.white, Colors.transparent],
-                  ),
-                ),
-                child: Image.network(
-                  url + widget.restaurant.imgSrc,
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-          ),
+          AppBarImage(url: url, imgSrc: widget.restaurant.imgSrc),
           SliverAppBar(
             primary: false,
             surfaceTintColor: Colors.white,
-            automaticallyImplyLeading: true,
+            automaticallyImplyLeading: false,
             pinned: true,
             floating: false,
             snap: false,
             stretch: false,
             bottom: PreferredSize(
               preferredSize: const Size.fromHeight(125),
-              child: Container(
-                padding: const EdgeInsets.only(top: 20),
-                color: Colors.white,
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+              child: GestureDetector(
+                  child: Container(
+                    padding: const EdgeInsets.only(top: 20),
+                    color: Colors.white,
+                    child: Column(
                       children: [
-                        RestaurantImage(restaurant: widget.restaurant),
-                        CardInfoRestaurant(restaurant: widget.restaurant),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            RestaurantImage(restaurant: widget.restaurant),
+                            InfoSummary(
+                              restaurant: widget.restaurant,
+                              kitchenTitle: widget.kitchenTitle,
+                            ),
+                          ],
+                        ),
+                        CaruselCategories(
+                            categories: _categories,
+                            categoryTitle: categoryTitle),
                       ],
                     ),
-                    const Divider(),
-                    CaruselCategories(
-                        categories: _categories, categoryTitle: categoryTitle),
-                  ],
-                ),
-              ),
+                  ),
+                  onTap: () {
+                    showModalBottomSheet(
+                      isScrollControlled: true,
+                      backgroundColor: Colors.transparent,
+                      context: context,
+                      builder: (context) => Padding(
+                        padding: const EdgeInsets.only(top: 60.0),
+                        child: ModalInfoAboutRestaurant(
+                          url: url,
+                          restaurant: widget.restaurant,
+                          kitchenTitle: widget.kitchenTitle,
+                        ),
+                      ),
+                    );
+                  }),
             ),
           ),
           BlocBuilder<RestaurantListBloc, RestaurantListState>(
@@ -110,55 +109,8 @@ class RestaurantScreenState extends State<RestaurantScreen> {
       ),
     );
   }
-}
 
-class CaruselCategories extends StatelessWidget {
-  const CaruselCategories({
-    super.key,
-    required List<String> categories,
-    required this.categoryTitle,
-  }) : _categories = categories;
-
-  final List<String> _categories;
-  final String categoryTitle;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.all(0),
-      color: Colors.white,
-      child: SizedBox(
-        height: 50,
-        child: Stack(
-          alignment: Alignment.centerLeft,
-          children: [
-            const IconMenu(),
-            Padding(
-              padding: const EdgeInsets.only(left: 45.0, right: 5.0),
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: _categories.length,
-                itemBuilder: (context, index) => Padding(
-                  padding: const EdgeInsets.only(right: 7),
-                  child: Center(
-                    child: GestureDetector(
-                      onTap: () {
-                        // setState(
-                        //     () => categoryTitle = _categories[index]);
-                      },
-                      child: TitleCategory(
-                        categories: _categories,
-                        categoryTitle: categoryTitle,
-                        index: index,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
+  void _callState() {
+    setState(() {});
   }
 }

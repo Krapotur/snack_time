@@ -101,12 +101,14 @@ class RestaurantRoute extends _i6.PageRouteInfo<RestaurantRouteArgs> {
   RestaurantRoute({
     _i7.Key? key,
     required _i8.Restaurant restaurant,
+    required String kitchenTitle,
     List<_i6.PageRouteInfo>? children,
   }) : super(
           RestaurantRoute.name,
           args: RestaurantRouteArgs(
             key: key,
             restaurant: restaurant,
+            kitchenTitle: kitchenTitle,
           ),
           initialChildren: children,
         );
@@ -120,6 +122,7 @@ class RestaurantRoute extends _i6.PageRouteInfo<RestaurantRouteArgs> {
       return _i5.RestaurantScreen(
         key: args.key,
         restaurant: args.restaurant,
+        kitchenTitle: args.kitchenTitle,
       );
     },
   );
@@ -129,14 +132,17 @@ class RestaurantRouteArgs {
   const RestaurantRouteArgs({
     this.key,
     required this.restaurant,
+    required this.kitchenTitle,
   });
 
   final _i7.Key? key;
 
   final _i8.Restaurant restaurant;
 
+  final String kitchenTitle;
+
   @override
   String toString() {
-    return 'RestaurantRouteArgs{key: $key, restaurant: $restaurant}';
+    return 'RestaurantRouteArgs{key: $key, restaurant: $restaurant, kitchenTitle: $kitchenTitle}';
   }
 }

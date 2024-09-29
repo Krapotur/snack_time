@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:snack_time/features/models/models.dart';
 import 'package:snack_time/repositories/repositories.dart';
@@ -22,6 +24,8 @@ class RestaurantListBloc
             restaurantList: restaurants, kitchenList: newKitchensList));
       } catch (e) {
         emit(RestaurantListFailure(error: e));
+      } finally {
+        event.completer?.complete();
       }
     });
 
