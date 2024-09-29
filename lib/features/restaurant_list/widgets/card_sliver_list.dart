@@ -27,6 +27,7 @@ class CardSliverList extends StatelessWidget {
               kitchenTitle: _getKitchenTitle(restaurantsList[i])));
         },
         child: Card(
+          margin: const EdgeInsets.symmetric(vertical: 3, horizontal: 8),
           elevation: 5,
           color: Colors.white,
           surfaceTintColor: Colors.white,

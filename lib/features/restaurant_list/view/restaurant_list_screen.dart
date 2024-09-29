@@ -21,11 +21,6 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
   String title = '';
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     String url = 'http://10.101.11.31:5000/';
 
@@ -116,7 +111,6 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
                   child: LoadingFailureWidget(),
                 );
               }
-
               return const SliverFillRemaining(
                 child: LoadingFailureWidget(),
               );

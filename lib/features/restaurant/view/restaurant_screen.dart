@@ -49,7 +49,6 @@ class RestaurantScreenState extends State<RestaurantScreen> {
               preferredSize: const Size.fromHeight(125),
               child: GestureDetector(
                   child: Container(
-                    padding: const EdgeInsets.only(top: 20),
                     color: Colors.white,
                     child: Column(
                       children: [

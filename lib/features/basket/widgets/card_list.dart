@@ -16,7 +16,7 @@ class CardsList extends StatelessWidget {
             SliverPadding(
               padding: const EdgeInsets.only(bottom: 8.0),
               sliver: SliverList.separated(
-                itemCount: 5,
+                itemCount: 3,
                 separatorBuilder: (context, i) => const Divider(
                   color: Colors.grey,
                   thickness: 0.2,

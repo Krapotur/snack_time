@@ -17,6 +17,7 @@ class TitleCategory extends StatelessWidget {
     return Text(
       _categories[index],
       style: TextStyle(
+          fontFamily: 'Playfair',
           color: categoryTitle == _categories[index]
               ? Theme.of(context).primaryColor
               : Colors.grey,

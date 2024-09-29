@@ -9,7 +9,7 @@ class AppbarOrder extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Container(
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
       decoration: const BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadiusDirectional.vertical(
@@ -21,6 +21,12 @@ class AppbarOrder extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            const Divider(
+              thickness: 2,
+              indent: 130,
+              endIndent: 130,
+              color: Colors.grey,
+            ),
             const Text(
               '3 товара на 1800 рублей',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),

@@ -18,7 +18,7 @@ class AppBarImage extends StatelessWidget {
       backgroundColor: Colors.white,
       pinned: false,
       floating: false,
-      expandedHeight: 160,
+      expandedHeight: 180,
       flexibleSpace: FlexibleSpaceBar(
         background: DecoratedBox(
           position: DecorationPosition.foreground,
@@ -26,7 +26,7 @@ class AppBarImage extends StatelessWidget {
             gradient: LinearGradient(
               begin: Alignment.bottomCenter,
               end: Alignment.center,
-              colors: <Color>[Colors.white, Colors.transparent],
+              colors: <Color>[Colors.white],
             ),
           ),
           child: Image.network(
