@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:snack_time/features/models/models.dart';
+import 'package:snack_time/repositories/models.dart';
 
 class InfoSummary extends StatelessWidget {
   final Restaurant? restaurant;
@@ -18,7 +18,7 @@ class InfoSummary extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                '"${restaurant?.title}"',
+                '${restaurant?.title}',
                 style: Theme.of(context).textTheme.titleMedium,
               ),
               Container(

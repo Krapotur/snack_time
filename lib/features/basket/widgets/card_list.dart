@@ -18,8 +18,7 @@ class CardsList extends StatelessWidget {
               sliver: SliverList.separated(
                 itemCount: 3,
                 separatorBuilder: (context, i) => const Divider(
-                  color: Colors.grey,
-                  thickness: 0.2,
+                  thickness: 0.5,
                 ),
                 itemBuilder: (context, i) => Container(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -29,8 +28,7 @@ class CardsList extends StatelessWidget {
             ),
             const SliverToBoxAdapter(
               child: Divider(
-                color: Colors.grey,
-                thickness: 0.2,
+                height: 1,
               ),
             ),
             const InputPromocode(),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:snack_time/features/models/models.dart';
 import 'package:snack_time/features/restaurant_list/widgets/widgets.dart';
+import 'package:snack_time/repositories/models.dart';
 
 class CardRestaurant extends StatelessWidget {
   const CardRestaurant({

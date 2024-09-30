@@ -34,7 +34,7 @@ class CaruselCategories extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 itemCount: _categories.length,
                 itemBuilder: (context, index) => Padding(
-                  padding: const EdgeInsets.only(right: 7),
+                  padding: const EdgeInsets.only(right: 2),
                   child: Center(
                     child: GestureDetector(
                       onTap: () {

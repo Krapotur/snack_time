@@ -12,12 +12,12 @@ import 'package:auto_route/auto_route.dart' as _i6;
 import 'package:flutter/material.dart' as _i7;
 import 'package:snack_time/features/basket/view/basket_screen.dart' as _i1;
 import 'package:snack_time/features/home/view/home_screen.dart' as _i2;
-import 'package:snack_time/features/models/models.dart' as _i8;
 import 'package:snack_time/features/profile/view/profile_screen.dart' as _i3;
 import 'package:snack_time/features/restaurant/view/restaurant_screen.dart'
     as _i5;
 import 'package:snack_time/features/restaurant_list/view/restaurant_list_screen.dart'
     as _i4;
+import 'package:snack_time/repositories/models.dart' as _i8;
 
 /// generated route for
 /// [_i1.BasketScreen]

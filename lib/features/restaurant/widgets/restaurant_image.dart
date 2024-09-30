@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:snack_time/features/models/models.dart';
 
 class RestaurantImage extends StatelessWidget {
-  final Restaurant? restaurant;
-  const RestaurantImage({super.key, this.restaurant});
+  final String imgSrc;
+  const RestaurantImage({super.key, required this.imgSrc});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +16,7 @@ class RestaurantImage extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
           image: DecorationImage(
-              image: NetworkImage(url + restaurant!.imgSrc), fit: BoxFit.cover),
+              image: NetworkImage(url + imgSrc), fit: BoxFit.cover),
         ),
       ),
     );

@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:snack_time/features/models/models.dart';
+import 'package:snack_time/repositories/models.dart';
 import 'package:snack_time/repositories/repositories.dart';
 
 part 'restaurant_list_event.dart';

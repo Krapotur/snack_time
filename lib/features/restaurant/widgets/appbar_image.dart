@@ -24,9 +24,9 @@ class AppBarImage extends StatelessWidget {
           position: DecorationPosition.foreground,
           decoration: const BoxDecoration(
             gradient: LinearGradient(
-              begin: Alignment.bottomCenter,
+              begin: Alignment.topCenter,
               end: Alignment.center,
-              colors: <Color>[Colors.white],
+              colors: <Color>[Colors.white, Colors.transparent],
             ),
           ),
           child: Image.network(

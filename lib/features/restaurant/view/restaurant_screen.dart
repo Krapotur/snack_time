@@ -1,9 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:snack_time/features/models/models.dart';
 import 'package:snack_time/features/restaurant/widgets/widgets.dart';
 import 'package:snack_time/features/restaurant_list/bloc/restaurant_list_bloc.dart';
+import 'package:snack_time/repositories/models.dart';
 
 @RoutePage()
 class RestaurantScreen extends StatefulWidget {
@@ -39,50 +39,52 @@ class RestaurantScreenState extends State<RestaurantScreen> {
           AppBarImage(url: url, imgSrc: widget.restaurant.imgSrc),
           SliverAppBar(
             primary: false,
-            surfaceTintColor: Colors.white,
+            surfaceTintColor: Theme.of(context).scaffoldBackgroundColor,
             automaticallyImplyLeading: false,
             pinned: true,
             floating: false,
             snap: false,
             stretch: false,
             bottom: PreferredSize(
-              preferredSize: const Size.fromHeight(125),
-              child: GestureDetector(
-                  child: Container(
-                    color: Colors.white,
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            RestaurantImage(restaurant: widget.restaurant),
-                            InfoSummary(
-                              restaurant: widget.restaurant,
-                              kitchenTitle: widget.kitchenTitle,
-                            ),
-                          ],
-                        ),
-                        CaruselCategories(
-                            categories: _categories,
-                            categoryTitle: categoryTitle),
-                      ],
-                    ),
-                  ),
-                  onTap: () {
-                    showModalBottomSheet(
-                      isScrollControlled: true,
-                      backgroundColor: Colors.transparent,
-                      context: context,
-                      builder: (context) => Padding(
-                        padding: const EdgeInsets.only(top: 60.0),
-                        child: ModalInfoAboutRestaurant(
-                          url: url,
-                          restaurant: widget.restaurant,
-                          kitchenTitle: widget.kitchenTitle,
-                        ),
+              preferredSize: const Size.fromHeight(100),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      GestureDetector(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              const Icon(Icons.info_outline_rounded),
+                              RestaurantImage(imgSrc: widget.restaurant.imgSrc),
+                            ],
+                          ),
+                          onTap: () {
+                            showModalBottomSheet(
+                              isScrollControlled: true,
+                              backgroundColor: Colors.transparent,
+                              context: context,
+                              builder: (context) => Padding(
+                                padding: const EdgeInsets.only(top: 60.0),
+                                child: ModalInfoAboutRestaurant(
+                                  url: url,
+                                  restaurant: widget.restaurant,
+                                  kitchenTitle: widget.kitchenTitle,
+                                ),
+                              ),
+                            );
+                          }),
+                      InfoSummary(
+                        restaurant: widget.restaurant,
+                        kitchenTitle: widget.kitchenTitle,
                       ),
-                    );
-                  }),
+                    ],
+                  ),
+                  CaruselCategories(
+                      categories: _categories, categoryTitle: categoryTitle),
+                ],
+              ),
             ),
           ),
           BlocBuilder<RestaurantListBloc, RestaurantListState>(

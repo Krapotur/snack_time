@@ -16,11 +16,7 @@ class _BasketScreenState extends State<BasketScreen> {
     return Column(
       children: [
         const AppbarOrder(),
-        const Divider(
-          color: Colors.grey,
-          height: 0.2,
-          thickness: 0.2,
-        ),
+        const Divider(height: 1.0),
         const CardsList(),
         Container(
           width: double.infinity,
@@ -29,10 +25,7 @@ class _BasketScreenState extends State<BasketScreen> {
           child: const Column(
             children: [
               InfoAbotDelivery(),
-              Divider(
-                color: Colors.grey,
-                thickness: 0.2,
-              ),
+              Divider(thickness: 1),
               BottomNavbar(),
             ],
           ),

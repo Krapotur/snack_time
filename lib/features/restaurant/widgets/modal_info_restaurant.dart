@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:snack_time/features/models/models.dart';
 import 'package:snack_time/features/restaurant/widgets/widgets.dart';
+import 'package:snack_time/repositories/models.dart';
 
 class ModalInfoAboutRestaurant extends StatelessWidget {
   const ModalInfoAboutRestaurant({
@@ -41,6 +41,7 @@ class ModalInfoAboutRestaurant extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 InfoSummary(
                   restaurant: restaurant,

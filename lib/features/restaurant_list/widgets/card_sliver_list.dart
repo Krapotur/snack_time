@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:snack_time/features/models/models.dart';
 import 'package:snack_time/features/restaurant_list/widgets/widgets.dart';
+import 'package:snack_time/repositories/models.dart';
 import 'package:snack_time/router/router.gr.dart';
 
 class CardSliverList extends StatelessWidget {

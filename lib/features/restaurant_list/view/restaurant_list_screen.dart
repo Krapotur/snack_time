@@ -3,9 +3,9 @@ import 'dart:async';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:snack_time/features/models/models.dart';
 import 'package:snack_time/features/restaurant_list/bloc/restaurant_list_bloc.dart';
 import 'package:snack_time/features/restaurant_list/widgets/widgets.dart';
+import 'package:snack_time/repositories/models.dart';
 import 'package:snack_time/ui/shared/widgets/loading_failure_widget.dart';
 
 @RoutePage()
@@ -129,7 +129,7 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
           backgroundColor: WidgetStatePropertyAll<Color>(
             title == kitchen.title
                 ? Theme.of(context).primaryColor
-                : Theme.of(context).highlightColor,
+                : Theme.of(context).hintColor,
           ),
         ),
         onPressed: () {
