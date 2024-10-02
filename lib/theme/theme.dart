@@ -6,6 +6,7 @@ final primaryTheme = ThemeData(
   scaffoldBackgroundColor: const Color.fromARGB(239, 255, 255, 255),
   primaryColor: const Color.fromARGB(255, 233, 123, 39),
   hintColor: Colors.black26,
+  highlightColor: const Color.fromARGB(255, 243, 243, 243),
   dividerTheme: const DividerThemeData(color: Colors.grey),
   iconTheme: const IconThemeData(color: Colors.grey),
   progressIndicatorTheme: const ProgressIndicatorThemeData(

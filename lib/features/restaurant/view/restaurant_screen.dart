@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:snack_time/features/restaurant/bloc/position_list_bloc.dart';
-import 'package:snack_time/features/restaurant/widgets/position/grid_positions.dart';
 import 'package:snack_time/features/restaurant/widgets/widgets.dart';
 import 'package:snack_time/repositories/models.dart';
 import 'package:snack_time/ui/shared/widgets/loading_failure_widget.dart';
@@ -20,7 +19,7 @@ class RestaurantScreen extends StatefulWidget {
 }
 
 class RestaurantScreenState extends State<RestaurantScreen> {
-  String categoryTitle = 'Горячие блюда';
+  String categoryTitle = '';
 
   List<Category> _categories = [];
 
@@ -117,9 +116,6 @@ class RestaurantScreenState extends State<RestaurantScreen> {
                             color: Colors.red,
                           );
                         }),
-
-                    // CaruselCategories(
-                    //     categories: _categories, categoryTitle: categoryTitle),
                   ],
                 ),
               ),
