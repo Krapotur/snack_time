@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:snack_time/repositories/models.dart';
 import 'package:snack_time/ui/shared/widgets/base_container.dart';
 
-class CardPosition extends StatelessWidget {
+class CardPosition extends StatefulWidget {
   const CardPosition({
     super.key,
     required this.url,
@@ -16,8 +16,14 @@ class CardPosition extends StatelessWidget {
   final int index;
 
   @override
+  State<CardPosition> createState() => _CardPositionState();
+}
+
+class _CardPositionState extends State<CardPosition> {
+  @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    double turns = 0.0;
     return BaseContainer(
       color: Colors.white,
       child: Column(
@@ -29,7 +35,8 @@ class CardPosition extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(18),
                 image: DecorationImage(
-                    image: NetworkImage(url + positionsList[index].imgSrc),
+                    image: NetworkImage(
+                        widget.url + widget.positionsList[widget.index].imgSrc),
                     fit: BoxFit.cover),
               ),
             ),
@@ -61,26 +68,31 @@ class CardPosition extends StatelessWidget {
                             image: DecorationImage(
                               fit: BoxFit.cover,
                               image: NetworkImage(
-                                url + positionsList[index].imgSrc,
+                                widget.url +
+                                    widget.positionsList[widget.index].imgSrc,
                               ),
                             ),
                           ),
                           child: GestureDetector(
                               child: Align(
-                                alignment: AlignmentDirectional.topEnd,
-                                child: Container(
-                                  padding: const EdgeInsets.all(3),
-                                  decoration: BoxDecoration(
-                                      color: Theme.of(context).primaryColor,
-                                      borderRadius: BorderRadius.circular(30)),
-                                  child: const Icon(
-                                    Icons.close,
-                                    color: Colors.white,
-                                    size: 25,
-                                  ),
-                                ),
-                              ),
-                              onTap: () => AutoRouter.of(context).back()),
+                                  alignment: AlignmentDirectional.topEnd,
+                                  child: Container(
+                                    padding: const EdgeInsets.all(3),
+                                    decoration: BoxDecoration(
+                                        color: Theme.of(context).primaryColor,
+                                        borderRadius:
+                                            BorderRadius.circular(30)),
+                                    child: AnimatedRotation(
+                                      duration: const Duration(seconds: 50),
+                                      turns: turns,
+                                      child: const Icon(
+                                        Icons.close,
+                                        color: Colors.white,
+                                        size: 25,
+                                      ),
+                                    ),
+                                  )),
+                              onTap: () => AutoRouter.of(context).maybePop()),
                         ),
                         Container(
                           width: double.infinity,
@@ -89,14 +101,14 @@ class CardPosition extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                positionsList[index].title,
+                                widget.positionsList[widget.index].title,
                                 style: const TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.w700,
                                 ),
                               ),
                               Text(
-                                '${positionsList[index].weight}г',
+                                '${widget.positionsList[widget.index].weight}г',
                                 style: TextStyle(
                                     fontSize: 13,
                                     color: Theme.of(context).hintColor),
@@ -112,7 +124,8 @@ class CardPosition extends StatelessWidget {
                                         fontWeight: FontWeight.w600),
                                   ),
                                   Text(
-                                    positionsList[index].composition,
+                                    widget.positionsList[widget.index]
+                                        .composition,
                                     style: const TextStyle(fontSize: 12),
                                   ),
                                 ],
@@ -138,7 +151,7 @@ class CardPosition extends StatelessWidget {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                            '${positionsList[index].caloric.toString()}г',
+                                            '${widget.positionsList[widget.index].caloric.toString()}г',
                                             style: theme.textTheme.labelSmall),
                                         Text('ккал',
                                             style: theme.textTheme.labelSmall),
@@ -150,7 +163,7 @@ class CardPosition extends StatelessWidget {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                            '${positionsList[index].proteins.toString()}г',
+                                            '${widget.positionsList[widget.index].proteins.toString()}г',
                                             style: theme.textTheme.labelSmall),
                                         Text('белки',
                                             style: theme.textTheme.labelSmall),
@@ -162,7 +175,7 @@ class CardPosition extends StatelessWidget {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                            '${positionsList[index].fats.toString()}г',
+                                            '${widget.positionsList[widget.index].fats.toString()}г',
                                             style: theme.textTheme.labelSmall),
                                         Text('жиры',
                                             style: theme.textTheme.labelSmall),
@@ -174,7 +187,7 @@ class CardPosition extends StatelessWidget {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                            '${positionsList[index].carbs.toString()}г',
+                                            '${widget.positionsList[widget.index].carbs.toString()}г',
                                             style: theme.textTheme.labelSmall),
                                         Text('углеводы',
                                             style: theme.textTheme.labelSmall),
@@ -192,21 +205,24 @@ class CardPosition extends StatelessWidget {
                   bottomNavigationBar: BottomAppBar(
                     height: 60,
                     color: Colors.white,
-                    child: Container(
-                      constraints: BoxConstraints(
-                        maxWidth: MediaQuery.of(context).size.width * 0.7,
-                      ),
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      height: 30,
-                      decoration: BoxDecoration(
-                          color: theme.primaryColor,
-                          borderRadius: BorderRadius.circular(50)),
-                      child: Center(
-                        child: Text(
-                          'В корзину за ${positionsList[index].price}руб.',
-                          style: const TextStyle(color: Colors.white),
+                    child: GestureDetector(
+                      child: Container(
+                        constraints: BoxConstraints(
+                          maxWidth: MediaQuery.of(context).size.width * 0.7,
+                        ),
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        height: 30,
+                        decoration: BoxDecoration(
+                            color: theme.primaryColor,
+                            borderRadius: BorderRadius.circular(50)),
+                        child: Center(
+                          child: Text(
+                            'В корзину за ${widget.positionsList[widget.index].price}руб.',
+                            style: const TextStyle(color: Colors.white),
+                          ),
                         ),
                       ),
+                      onTap: () => AutoRouter.of(context).maybePop(),
                     ),
                   ),
                 ),
@@ -214,13 +230,13 @@ class CardPosition extends StatelessWidget {
             ),
           ),
           Text(
-            '${positionsList[index].price} руб.',
+            '${widget.positionsList[widget.index].price} руб.',
             style: const TextStyle(
                 fontSize: 15, fontFamily: 'Lora', fontWeight: FontWeight.w700),
           ),
           Flexible(
             child: Text(
-              positionsList[index].title,
+              widget.positionsList[widget.index].title,
               style: const TextStyle(
                 overflow: TextOverflow.ellipsis,
                 fontSize: 12,
@@ -228,8 +244,8 @@ class CardPosition extends StatelessWidget {
             ),
           ),
           Text(
-              '${positionsList[index].weight}г + '
-              '${positionsList[index].caloric}калл',
+              '${widget.positionsList[widget.index].weight}г + '
+              '${widget.positionsList[widget.index].caloric}калл',
               style:
                   TextStyle(fontSize: 10, color: Theme.of(context).hintColor)),
           const SizedBox(height: 5),
