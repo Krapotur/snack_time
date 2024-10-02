@@ -28,7 +28,7 @@ class AppbarOrder extends StatelessWidget {
               color: Colors.grey,
             ),
             const Text(
-              '3 товара на 1800 рублей',
+              '1 товар на 650 рублей',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 5),

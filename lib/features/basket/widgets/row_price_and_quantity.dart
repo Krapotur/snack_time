@@ -13,7 +13,7 @@ class RowPriceAndQuantity extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           const Text(
-            '600р',
+            '650',
             style: TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
           ),
           Container(
@@ -26,15 +26,9 @@ class RowPriceAndQuantity extends StatelessWidget {
             child: const Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Text(
-                  '-',
-                  style: TextStyle(fontSize: 20),
-                ),
+                Icon(Icons.remove_outlined),
                 Text('1'),
-                Text(
-                  '+',
-                  style: TextStyle(fontSize: 20),
-                ),
+                Icon(Icons.add),
               ],
             ),
           ),

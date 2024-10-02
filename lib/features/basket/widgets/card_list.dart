@@ -16,20 +16,17 @@ class CardsList extends StatelessWidget {
             SliverPadding(
               padding: const EdgeInsets.only(bottom: 8.0),
               sliver: SliverList.separated(
-                itemCount: 3,
-                separatorBuilder: (context, i) => const Divider(
-                  thickness: 0.5,
-                ),
+                itemCount: 1,
+                separatorBuilder: (context, i) =>
+                    const Divider(height: 0.5, thickness: 0.5),
                 itemBuilder: (context, i) => Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
                   child: const CardOrder(),
                 ),
               ),
             ),
             const SliverToBoxAdapter(
-              child: Divider(
-                height: 1,
-              ),
+              child: Divider(height: 0.5, thickness: 0.5),
             ),
             const InputPromocode(),
             // const InfoAbotDelivery(),

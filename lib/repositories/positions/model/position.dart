@@ -6,9 +6,9 @@ class Position {
   final int price;
   final int weight;
   final int caloric;
-  final double proteins;
-  final double fats;
-  final double carbs;
+  final int proteins;
+  final int fats;
+  final int carbs;
   final String imgSrc;
   final String category;
   final String restaurant;

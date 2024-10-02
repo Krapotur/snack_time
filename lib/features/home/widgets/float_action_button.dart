@@ -27,7 +27,7 @@ class FloatActionButton extends StatelessWidget {
         child: Badge(
           largeSize: 2,
           label: Text(
-            '3',
+            '1',
             style:
                 TextStyle(color: Theme.of(context).primaryColor, fontSize: 15),
           ),

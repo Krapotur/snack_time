@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:snack_time/repositories/kitchens/models/kitchen.dart';
+import 'package:snack_time/repositories/kitchens/model/kitchen.dart';
 import 'package:snack_time/repositories/models.dart';
 
 class KitchensRepository {

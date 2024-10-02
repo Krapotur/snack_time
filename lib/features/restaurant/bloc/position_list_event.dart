@@ -9,3 +9,11 @@ class FilterPositionsListEvent extends PositionListEvent {
 
   FilterPositionsListEvent({required this.restaurantID});
 }
+
+class FilterPositionsByCategory extends PositionListEvent {
+  final String restaurantID;
+  final String categoryID;
+
+  FilterPositionsByCategory(
+      {required this.restaurantID, required this.categoryID});
+}

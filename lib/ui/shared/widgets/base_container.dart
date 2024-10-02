@@ -14,7 +14,7 @@ class BaseContainer extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: color,
-        borderRadius: BorderRadius.circular(17),
+        borderRadius: BorderRadius.circular(18),
       ),
       height: 160,
       width: 130,

@@ -15,7 +15,7 @@ class InfoAbotDelivery extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('3 товара'),
+              Text('1 товар'),
               Text('Бонусы'),
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -35,8 +35,8 @@ class InfoAbotDelivery extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              Text('1800 Р'),
-              Text('+25'),
+              Text('650 Р'),
+              Text('+10'),
               Text('Бесплатно'),
             ],
           ),

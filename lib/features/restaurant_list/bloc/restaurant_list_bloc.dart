@@ -9,7 +9,8 @@ part 'restaurant_list_state.dart';
 
 class RestaurantListBloc
     extends Bloc<RestaurantListEvent, RestaurantListState> {
-  RestaurantListBloc(this.restaurantsRepository, this.kitchensRepository)
+  RestaurantListBloc(
+      {required this.restaurantsRepository, required this.kitchensRepository})
       : super(RestaurantListInitial()) {
     on<SearchRestaurantList>((event, emit) async {
       emit(RestaurantListLoading());

@@ -22,7 +22,7 @@ class CardOrder extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadiusDirectional.circular(10),
                     image: const DecorationImage(
-                        image: AssetImage('assets/img/plov.jpg'),
+                        image: AssetImage('assets/img/shashlyk_baranina.jpg'),
                         fit: BoxFit.cover),
                   ),
                 ),
@@ -34,14 +34,14 @@ class CardOrder extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Шашлык с бараниной',
+                      'Шашлык из баранины',
                       style: TextStyle(
                         fontWeight: FontWeight.w600,
                         fontSize: 16,
                       ),
                     ),
                     Text(
-                      '180 г',
+                      '250 г',
                       style: TextStyle(fontSize: 14, color: Colors.grey),
                     ),
                   ],

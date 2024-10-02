@@ -32,17 +32,5 @@ class TitleCategory extends StatelessWidget {
         style: const TextStyle(color: Colors.white, fontSize: 15),
       ),
     );
-
-    // Text(
-    //   _categories[index],
-    //   style: TextStyle(
-    //       fontFamily: 'Playfair',
-    //       color: categoryTitle == _categories[index]
-    //           ? Theme.of(context).primaryColor
-    //           : Colors.grey,
-    //       fontWeight: categoryTitle == _categories[index]
-    //           ? FontWeight.bold
-    //           : FontWeight.normal),
-    // );
   }
 }
