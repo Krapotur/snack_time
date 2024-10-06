@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dio/dio.dart';
 import 'package:snack_time/repositories/models.dart';
 
@@ -11,7 +9,6 @@ class PositionsRepository {
   Future<List<Position>> getPositionsList({String categoryID = ''}) async {
     String url = 'http://10.101.11.31:5000/api/positions';
     List<Position> positionsList = [];
-    log(url + (categoryID.isNotEmpty ? '/category/$categoryID' : ''));
 
     final response = await dio
         .get(url + (categoryID.isNotEmpty ? '/category/$categoryID' : ''));

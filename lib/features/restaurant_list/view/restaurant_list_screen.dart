@@ -98,7 +98,15 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
             builder: (context, state) {
               if (state is RestaurantListLoading) {
                 return const SliverFillRemaining(
-                    child: Center(child: CircularProgressIndicator()));
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CircularProgressIndicator(),
+                      SizedBox(height: 5),
+                      Text('Подключение к серверу...'),
+                    ],
+                  ),
+                );
               }
               if (state is RestaurantListLoaded) {
                 return CardSliverList(
@@ -112,7 +120,14 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
                 );
               }
               return const SliverFillRemaining(
-                child: LoadingFailureWidget(),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CircularProgressIndicator(),
+                    SizedBox(height: 5),
+                    Text('Подключение к серверу...'),
+                  ],
+                ),
               );
             },
           )

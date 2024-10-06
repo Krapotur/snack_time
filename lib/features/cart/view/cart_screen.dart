@@ -1,16 +1,16 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:snack_time/features/basket/widgets/widgets.dart';
+import 'package:snack_time/features/cart/widgets/widgets.dart';
 
 @RoutePage()
-class BasketScreen extends StatefulWidget {
-  const BasketScreen({super.key});
+class CartScreen extends StatefulWidget {
+  const CartScreen({super.key});
 
   @override
-  State<BasketScreen> createState() => _BasketScreenState();
+  State<CartScreen> createState() => _CartScreenState();
 }
 
-class _BasketScreenState extends State<BasketScreen> {
+class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
     return Column(

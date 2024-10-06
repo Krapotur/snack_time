@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:snack_time/features/basket/basket.dart';
+import 'package:snack_time/features/cart/cart.dart';
 
 class FloatActionButton extends StatelessWidget {
   const FloatActionButton({
@@ -45,7 +45,7 @@ class FloatActionButton extends StatelessWidget {
         context: context,
         builder: (context) => const Padding(
           padding: EdgeInsets.only(top: 60.0),
-          child: BasketScreen(),
+          child: CartScreen(),
         ),
       ),
     );

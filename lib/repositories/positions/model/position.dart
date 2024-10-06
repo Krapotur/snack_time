@@ -12,6 +12,7 @@ class Position {
   final String imgSrc;
   final String category;
   final String restaurant;
+  final int quantityInCart = 0;
 
   const Position(
       {required this.id,

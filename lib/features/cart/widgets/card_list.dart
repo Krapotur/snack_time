@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:snack_time/features/basket/widgets/widgets.dart';
+import 'package:snack_time/features/cart/widgets/widgets.dart';
 
 class CardsList extends StatelessWidget {
   const CardsList({
