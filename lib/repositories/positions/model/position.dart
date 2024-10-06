@@ -12,9 +12,9 @@ class Position {
   final String imgSrc;
   final String category;
   final String restaurant;
-  final int quantityInCart = 0;
+  int quantityInCart;
 
-  const Position(
+  Position(this.quantityInCart,
       {required this.id,
       required this.status,
       required this.title,

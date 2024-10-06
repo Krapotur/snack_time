@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:snack_time/features/cart/bloc/cart_bloc.dart';
 import 'package:snack_time/features/home/widgets/widgets.dart';
 import 'package:snack_time/features/restaurant_list/bloc/restaurant_list_bloc.dart';
 import 'package:snack_time/router/router.gr.dart';
@@ -47,12 +48,8 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           ),
           floatingActionButton:
-              BlocBuilder<RestaurantListBloc, RestaurantListState>(
-                  builder: (context, state) {
-            if (state is RestaurantListLoaded) {
-              return const FloatActionButton();
-            }
-            return const SizedBox.shrink();
+              BlocBuilder<CartBloc, CartState>(builder: (context, state) {
+            return FloatActionButton(positions: state.cartPositions);
           }),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerDocked,

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:snack_time/repositories/models.dart';
 
 class AppbarOrder extends StatelessWidget {
-  const AppbarOrder({
-    super.key,
-  });
+  const AppbarOrder({super.key, required this.positions});
+
+  final List<Position> positions;
 
   @override
   Widget build(BuildContext context) {
@@ -27,9 +28,9 @@ class AppbarOrder extends StatelessWidget {
               endIndent: 130,
               color: Colors.grey,
             ),
-            const Text(
-              '1 товар на 650 рублей',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            Text(
+              '${positions.length} товар на ${_getSum(positions)} рублей',
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 5),
             Text(
@@ -40,5 +41,13 @@ class AppbarOrder extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  int _getSum(List<Position> positions) {
+    int summ = 0;
+    for (var position in positions) {
+      summ += position.quantityInCart * position.price;
+    }
+    return summ;
   }
 }

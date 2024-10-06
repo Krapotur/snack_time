@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:snack_time/features/cart/bloc/cart_bloc.dart';
 import 'package:snack_time/features/restaurant/bloc/position_list_bloc.dart';
 import 'package:snack_time/features/restaurant_list/bloc/restaurant_list_bloc.dart';
 import 'package:snack_time/repositories/repositories.dart';
@@ -26,6 +27,9 @@ class SnackTimeApp extends StatelessWidget {
               restaurantsRepository: RestaurantsRepository(dio: Dio()),
               positionsRepository: PositionsRepository(dio: Dio()),
               categoriesRepository: CategoriesRepository(dio: Dio())),
+        ),
+        BlocProvider<CartBloc>(
+          create: (BuildContext context) => CartBloc(),
         ),
       ],
       child: MaterialApp.router(

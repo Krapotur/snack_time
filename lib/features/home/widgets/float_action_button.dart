@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:snack_time/features/cart/cart.dart';
+import 'package:snack_time/repositories/models.dart';
 
 class FloatActionButton extends StatelessWidget {
   const FloatActionButton({
     super.key,
+    required this.positions,
   });
+
+  final List<Position> positions;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +31,7 @@ class FloatActionButton extends StatelessWidget {
         child: Badge(
           largeSize: 2,
           label: Text(
-            '1',
+            positions.length.toString(),
             style:
                 TextStyle(color: Theme.of(context).primaryColor, fontSize: 15),
           ),
@@ -70,5 +74,15 @@ class FloatActionButton extends StatelessWidget {
     //     style: TextStyle(color: Colors.white),
     //   ),
     // );
+  }
+
+  int _getQuantityPositions(List<Position> positions) {
+    int summ = 0;
+
+    for (var position in positions) {
+      summ += position.quantityInCart;
+    }
+
+    return summ;
   }
 }

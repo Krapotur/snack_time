@@ -1,5 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:snack_time/features/cart/bloc/cart_bloc.dart';
 import 'package:snack_time/features/restaurant/widgets/widgets.dart';
 import 'package:snack_time/repositories/models.dart';
 import 'package:snack_time/ui/shared/widgets/base_container.dart';
@@ -123,18 +125,32 @@ class _CardPositionState extends State<CardPosition> {
                   TextStyle(fontSize: 10, color: Theme.of(context).hintColor)),
           const SizedBox(height: 5),
           Container(
-            margin: const EdgeInsets.symmetric(horizontal: 10),
+            margin: const EdgeInsets.symmetric(horizontal: 18),
             decoration: BoxDecoration(
               color: const Color.fromARGB(255, 227, 227, 227),
               borderRadius: BorderRadius.circular(20),
             ),
-            child: const Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Icon(Icons.remove_outlined),
-                Text('1'),
-                Icon(Icons.add),
-              ],
+            child: SizedBox(
+              height: 30,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  const Icon(Icons.remove_outlined),
+                  const Text('1'),
+                  GestureDetector(
+                      child: const Icon(Icons.add),
+                      onTap: () {
+                        BlocProvider.of<CartBloc>(context).add(
+                            AddPositionCartEvent(
+                                position: widget.positionsList[widget.index]));
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text(
+                              '${widget.positionsList[widget.index].title} добавлен в корзину'),
+                          duration: const Duration(seconds: 1),
+                        ));
+                      }),
+                ],
+              ),
             ),
           ),
         ],

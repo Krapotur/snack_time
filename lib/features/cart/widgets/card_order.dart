@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:snack_time/features/cart/widgets/widgets.dart';
+import 'package:snack_time/repositories/positions/model/position.dart';
 
 class CardOrder extends StatelessWidget {
   const CardOrder({
     super.key,
+    required this.positions,
+    required this.index,
   });
+  final List<Position> positions;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
+    String url = 'http://10.101.11.31:5000/';
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -21,28 +27,28 @@ class CardOrder extends StatelessWidget {
                   width: 80,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadiusDirectional.circular(10),
-                    image: const DecorationImage(
-                        image: AssetImage('assets/img/shashlyk_baranina.jpg'),
+                    image: DecorationImage(
+                        image: NetworkImage(url + positions[index].imgSrc),
                         fit: BoxFit.cover),
                   ),
                 ),
                 const SizedBox(
                   width: 17,
                 ),
-                const Column(
+                Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Шашлык из баранины',
-                      style: TextStyle(
+                      positions[index].title,
+                      style: const TextStyle(
                         fontWeight: FontWeight.w600,
                         fontSize: 16,
                       ),
                     ),
                     Text(
-                      '250 г',
-                      style: TextStyle(fontSize: 14, color: Colors.grey),
+                      '${positions[index].weight} г',
+                      style: const TextStyle(fontSize: 14, color: Colors.grey),
                     ),
                   ],
                 ),
@@ -50,7 +56,7 @@ class CardOrder extends StatelessWidget {
             ),
           ],
         ),
-        const RowPriceAndQuantity(),
+        RowPriceAndQuantity(positions: positions, index: index),
       ],
     );
   }

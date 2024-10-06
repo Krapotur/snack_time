@@ -1,23 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:snack_time/repositories/positions/model/position.dart';
 
 class InfoAbotDelivery extends StatelessWidget {
   const InfoAbotDelivery({
     super.key,
+    required this.positions,
   });
+
+  final List<Position> positions;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.only(top: 15, left: 20, right: 20, bottom: 10),
-      child: const Row(
+      child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('1 товар'),
-              Text('Бонусы'),
-              Row(
+              Text('Товаров: ${positions.length.toString()}'),
+              const Text('Бонусы'),
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text('Доставка'),
@@ -35,9 +39,9 @@ class InfoAbotDelivery extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              Text('650 Р'),
-              Text('+10'),
-              Text('Бесплатно'),
+              Text('${_getSum(positions).toString()}руб.'),
+              const Text('+10'),
+              const Text('Бесплатно'),
             ],
           ),
         ],
@@ -85,5 +89,13 @@ class InfoAbotDelivery extends StatelessWidget {
     //     ),
     //   ),
     // );
+  }
+
+  int _getSum(List<Position> positions) {
+    int summ = 0;
+    for (var position in positions) {
+      summ += position.quantityInCart * position.price;
+    }
+    return summ;
   }
 }

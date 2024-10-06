@@ -15,7 +15,7 @@ class PositionsRepository {
     final dataList = response.data;
 
     for (var e in dataList) {
-      final Position position = Position(
+      final Position position = Position(1,
           id: e['_id'],
           status: e['status'],
           title: e['title'],
