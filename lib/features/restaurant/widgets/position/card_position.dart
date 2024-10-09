@@ -130,28 +130,39 @@ class _CardPositionState extends State<CardPosition> {
               color: const Color.fromARGB(255, 227, 227, 227),
               borderRadius: BorderRadius.circular(20),
             ),
-            child: SizedBox(
-              height: 30,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  const Icon(Icons.remove_outlined),
-                  const Text('1'),
-                  GestureDetector(
-                      child: const Icon(Icons.add),
-                      onTap: () {
-                        BlocProvider.of<CartBloc>(context).add(
-                            AddPositionCartEvent(
-                                position: widget.positionsList[widget.index]));
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          content: Text(
-                              '${widget.positionsList[widget.index].title} добавлен в корзину'),
-                          duration: const Duration(seconds: 1),
-                        ));
-                      }),
-                ],
-              ),
-            ),
+            child: BlocBuilder<CartBloc, CartState>(builder: (context, state) {
+              final positions = state.cartPositions;
+              var findPosition = positions
+                  .where((x) => x.id == widget.positionsList[widget.index].id)
+                  .toList();
+              return SizedBox(
+                height: 30,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    GestureDetector(
+                        child: const Icon(Icons.remove_outlined),
+                        onTap: () {
+                          BlocProvider.of<CartBloc>(context).add(
+                              RemovePositionCartEvent(
+                                  position:
+                                      widget.positionsList[widget.index]));
+                        }),
+                    Text(findPosition.isNotEmpty
+                        ? findPosition[0].quantityInCart.toString()
+                        : '0'),
+                    GestureDetector(
+                        child: const Icon(Icons.add),
+                        onTap: () {
+                          BlocProvider.of<CartBloc>(context).add(
+                              AddPositionCartEvent(
+                                  position:
+                                      widget.positionsList[widget.index]));
+                        }),
+                  ],
+                ),
+              );
+            }),
           ),
         ],
       ),

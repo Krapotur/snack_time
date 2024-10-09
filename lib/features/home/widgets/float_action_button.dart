@@ -1,3 +1,4 @@
+import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:snack_time/features/cart/cart.dart';
@@ -28,14 +29,15 @@ class FloatActionButton extends StatelessWidget {
             ),
           ],
         ),
-        child: Badge(
-          largeSize: 2,
-          label: Text(
-            positions.length.toString(),
+        child: badges.Badge(
+          badgeAnimation: const badges.BadgeAnimation.rotation(),
+          badgeContent: Text(
+            _getQuantityPositions(positions).toString(),
             style:
                 TextStyle(color: Theme.of(context).primaryColor, fontSize: 15),
           ),
-          backgroundColor: Colors.white,
+          position: badges.BadgePosition.topEnd(),
+          badgeStyle: const badges.BadgeStyle(badgeColor: Colors.white),
           child: const FaIcon(
             FontAwesomeIcons.basketShopping,
             color: Colors.white,

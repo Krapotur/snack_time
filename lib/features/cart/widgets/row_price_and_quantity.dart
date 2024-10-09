@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:snack_time/features/cart/bloc/cart_bloc.dart';
 import 'package:snack_time/repositories/positions/model/position.dart';
 
 class RowPriceAndQuantity extends StatelessWidget {
@@ -31,13 +33,23 @@ class RowPriceAndQuantity extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                const Icon(Icons.remove_outlined),
+                GestureDetector(
+                    child: const Icon(Icons.remove_outlined),
+                    onTap: () {
+                      BlocProvider.of<CartBloc>(context).add(
+                          RemovePositionCartEvent(position: positions[index]));
+                    }),
                 Text(
                   positions[index].quantityInCart > 0
                       ? positions[index].quantityInCart.toString()
                       : '1',
                 ),
-                const Icon(Icons.add),
+                GestureDetector(
+                    child: const Icon(Icons.add),
+                    onTap: () {
+                      BlocProvider.of<CartBloc>(context).add(
+                          AddPositionCartEvent(position: positions[index]));
+                    }),
               ],
             ),
           ),

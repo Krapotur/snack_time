@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:snack_time/features/cart/bloc/cart_bloc.dart';
+import 'package:snack_time/features/home/widgets/widgets.dart';
 import 'package:snack_time/features/restaurant/bloc/position_list_bloc.dart';
 import 'package:snack_time/features/restaurant/widgets/widgets.dart';
 import 'package:snack_time/repositories/models.dart';
@@ -149,6 +151,13 @@ class RestaurantScreenState extends State<RestaurantScreen> {
           }),
         ],
       ),
+      floatingActionButton:
+          BlocBuilder<CartBloc, CartState>(builder: (context, state) {
+        return state.cartPositions.isNotEmpty
+            ? FloatActionButton(positions: state.cartPositions)
+            : const SizedBox();
+      }),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }
 

@@ -49,7 +49,9 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           floatingActionButton:
               BlocBuilder<CartBloc, CartState>(builder: (context, state) {
-            return FloatActionButton(positions: state.cartPositions);
+            return state.cartPositions.isNotEmpty
+                ? FloatActionButton(positions: state.cartPositions)
+                : const SizedBox();
           }),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerDocked,

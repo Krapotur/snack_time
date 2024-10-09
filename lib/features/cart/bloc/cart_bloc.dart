@@ -9,45 +9,52 @@ class CartBloc extends Bloc<CartEvent, CartState> {
   CartBloc() : super(CartState(cartPositions: [])) {
     on<CartEvent>(_mapEventToState);
   }
+
   Future<void> _mapEventToState(
       CartEvent event, Emitter<CartState> emit) async {
     if (event is AddPositionCartEvent) {
-      // final updatedCart = List<Position>.from(state.cartPositions)
-      //   ..add(event.position);
+      //   final updatedCart = List<Position>.from(state.cartPositions)
+      //     ..add(event.position);
 
-      final positions =
-          _checkPositionsinCart(state.cartPositions, event.position);
+      if (state.cartPositions.isEmpty) {
+        --event.position.quantityInCart;
+        state.cartPositions.add(event.position);
+      }
+      final positions = _addPosition(state, event.position);
+      emit(CartState(cartPositions: positions));
+    }
+
+    if (event is RemovePositionCartEvent) {
+      final positions = _removePosition(state, event.position);
       emit(CartState(cartPositions: positions));
     }
   }
 
-  List<Position> _checkPositionsinCart(
-      List<Position> positions, Position position) {
-    List<Position> positionsList = positions;
-    if (positionsList.isEmpty) {
-      positionsList.add(position);
+  List<Position> _addPosition(CartState state, Position position) {
+    List<Position> positionsList = List<Position>.from(state.cartPositions);
+
+    var result = positionsList.where((x) => x.id == position.id).toList();
+    if (result.isNotEmpty) {
+      ++result[0].quantityInCart;
     } else {
-      for (var x in positions) {
-        if (x.id != position.id) {
-          positionsList.add(position);
-        } else {
-          ++x.quantityInCart;
-          positionsList.add(x);
-        }
-      }
+      positionsList.add(position);
     }
 
-    // for (var x in positions) {
-    //   if (positionsList.isEmpty) {
-    //     positionsList.add(x);
-    //   } else {
-    //     for (var e in positionsList) {
-    //       if (x.id == e.id) {
-    //         ++e.quantityInCart;
-    //       }
-    //     }
-    //   }
-    // }
+    return positionsList;
+  }
+
+  List<Position> _removePosition(CartState state, Position position) {
+    List<Position> positionsList = List<Position>.from(state.cartPositions);
+
+    var result = positionsList.where((x) => x.id == position.id).toList();
+
+    if (result.isNotEmpty && result[0].quantityInCart > 0) {
+      --result[0].quantityInCart;
+      if (result[0].quantityInCart == 0) {
+        positionsList = List<Position>.from(state.cartPositions);
+        positionsList.remove(position);
+      }
+    }
 
     return positionsList;
   }

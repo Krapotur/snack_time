@@ -16,4 +16,8 @@ class AddPositionCartEvent extends CartEvent {
   List<Object> get props => [position];
 }
 
-class RemovePositionCartEvent extends CartEvent {}
+class RemovePositionCartEvent extends CartEvent {
+  final Position position;
+
+  RemovePositionCartEvent({required this.position});
+}
