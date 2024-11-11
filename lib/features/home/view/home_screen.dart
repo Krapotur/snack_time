@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:snack_time/features/cart/bloc/cart_bloc.dart';
 import 'package:snack_time/features/home/widgets/widgets.dart';
-import 'package:snack_time/features/restaurant_list/bloc/restaurant_list_bloc.dart';
+import 'package:snack_time/features/positions/bloc/position_list_bloc.dart';
 import 'package:snack_time/router/router.gr.dart';
 
 @RoutePage()
@@ -17,9 +17,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
-    BlocProvider.of<RestaurantListBloc>(context)
-        .add(SearchRestaurantList(completer: null));
-
+    BlocProvider.of<PositionListBloc>(context)
+        .add(SearchPositionsListEvent(null));
     super.initState();
   }
 
@@ -27,8 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return AutoTabsRouter(
       routes: const [
-        RestaurantListRoute(),
-        // BasketRoute(),
+        PositionsRoute(),
         ProfileRoute(),
       ],
       builder: (context, child) {
@@ -42,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
             selectedItemColor: Theme.of(context).primaryColor,
             items: const [
               BottomNavigationBarItem(
-                  icon: Icon(Icons.fastfood), label: 'Рестораны'),
+                  icon: Icon(Icons.fastfood), label: 'Меню'),
               BottomNavigationBarItem(
                   icon: Icon(Icons.account_circle_sharp), label: 'Профиль')
             ],

@@ -15,6 +15,14 @@ class BaseContainer extends StatelessWidget {
       decoration: BoxDecoration(
         color: color,
         borderRadius: BorderRadius.circular(18),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.5),
+            spreadRadius: 0,
+            blurRadius: 2,
+            offset: const Offset(0, 1), // changes position of shadow
+          ),
+        ],
       ),
       height: 160,
       width: 130,

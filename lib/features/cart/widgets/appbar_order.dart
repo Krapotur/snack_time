@@ -29,12 +29,12 @@ class AppbarOrder extends StatelessWidget {
               color: Colors.grey,
             ),
             Text(
-              '${positions.length} товар на ${_getSum(positions)} рублей',
+              'Товары ${positions.length} на ${_getSum(positions)} рублей',
               style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 5),
             Text(
-              '"Оазис"',
+              '"Italiano R&K"',
               style: theme.textTheme.titleMedium?.copyWith(color: Colors.grey),
             ),
           ],

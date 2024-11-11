@@ -55,27 +55,6 @@ class FloatActionButton extends StatelessWidget {
         ),
       ),
     );
-
-    // TextButton(
-    //   style: ButtonStyle(
-    //       backgroundColor:
-    //           WidgetStatePropertyAll<Color>(Theme.of(context).primaryColor)),
-    //   onPressed: () => {
-    //     showModalBottomSheet(
-    //       isScrollControlled: true,
-    //       backgroundColor: Colors.transparent,
-    //       context: context,
-    //       builder: (context) => const Padding(
-    //         padding: EdgeInsets.only(top: 60.0),
-    //         child: BasketScreen(),
-    //       ),
-    //     ),
-    //   },
-    //   child: const Text(
-    //     'Корзина(3)',
-    //     style: TextStyle(color: Colors.white),
-    //   ),
-    // );
   }
 
   int _getQuantityPositions(List<Position> positions) {

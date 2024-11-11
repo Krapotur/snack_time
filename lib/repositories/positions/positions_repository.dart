@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:snack_time/repositories/api_url.dart';
 import 'package:snack_time/repositories/models.dart';
 
 class PositionsRepository {
@@ -7,7 +8,7 @@ class PositionsRepository {
   PositionsRepository({required this.dio});
 
   Future<List<Position>> getPositionsList({String categoryID = ''}) async {
-    String url = 'http://10.101.11.31:5000/api/positions';
+    String url = '${apiUrl}api/positions';
     List<Position> positionsList = [];
 
     final response = await dio

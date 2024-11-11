@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:snack_time/features/restaurant_list/bloc/restaurant_list_bloc.dart';
+import 'package:snack_time/features/positions/bloc/position_list_bloc.dart';
 
 class LoadingFailureWidget extends StatelessWidget {
   const LoadingFailureWidget({super.key});
@@ -45,8 +45,8 @@ class LoadingFailureWidget extends StatelessWidget {
                   color: Theme.of(context).primaryColor),
             ),
             onPressed: () => {
-              BlocProvider.of<RestaurantListBloc>(context)
-                  .add(SearchRestaurantList(completer: null)),
+              BlocProvider.of<PositionListBloc>(context)
+                  .add(SearchPositionsListEvent(null)),
             },
           ),
         ],

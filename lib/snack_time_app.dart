@@ -2,8 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:snack_time/features/cart/bloc/cart_bloc.dart';
-import 'package:snack_time/features/restaurant/bloc/position_list_bloc.dart';
-import 'package:snack_time/features/restaurant_list/bloc/restaurant_list_bloc.dart';
+import 'package:snack_time/features/positions/bloc/position_list_bloc.dart';
 import 'package:snack_time/repositories/repositories.dart';
 import 'package:snack_time/router/router.dart';
 import 'package:snack_time/theme/theme.dart';
@@ -13,29 +12,31 @@ class SnackTimeApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Dio dio = Dio();
     final appRouter = AppRouter();
-    return MultiBlocProvider(
+    return MultiRepositoryProvider(
       providers: [
-        BlocProvider<RestaurantListBloc>(
-          create: (BuildContext context) => RestaurantListBloc(
-            restaurantsRepository: RestaurantsRepository(dio: Dio()),
-            kitchensRepository: KitchensRepository(dio: Dio()),
-          ),
-        ),
-        BlocProvider<PositionListBloc>(
-          create: (BuildContext context) => PositionListBloc(
-              restaurantsRepository: RestaurantsRepository(dio: Dio()),
-              positionsRepository: PositionsRepository(dio: Dio()),
-              categoriesRepository: CategoriesRepository(dio: Dio())),
-        ),
-        BlocProvider<CartBloc>(
-          create: (BuildContext context) => CartBloc(),
-        ),
+        RepositoryProvider<PositionsRepository>(
+            create: (context) => PositionsRepository(dio: dio)),
+        RepositoryProvider<CategoriesRepository>(
+            create: (context) => CategoriesRepository(dio: dio)),
       ],
-      child: MaterialApp.router(
-        theme: primaryTheme,
-        debugShowCheckedModeBanner: false,
-        routerConfig: appRouter.config(),
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider<PositionListBloc>(
+            create: (BuildContext context) => PositionListBloc(
+                positionsRepository: context.read<PositionsRepository>(),
+                categoriesRepository: context.read<CategoriesRepository>()),
+          ),
+          BlocProvider<CartBloc>(
+            create: (BuildContext context) => CartBloc(),
+          ),
+        ],
+        child: MaterialApp.router(
+          theme: primaryTheme,
+          debugShowCheckedModeBanner: false,
+          routerConfig: appRouter.config(),
+        ),
       ),
     );
   }

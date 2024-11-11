@@ -30,10 +30,13 @@ class CardsList extends StatelessWidget {
                 ),
               ),
             ),
-            const SliverToBoxAdapter(
-              child: Divider(height: 0.5, thickness: 0.5),
-            ),
-            const InputPromocode(),
+            positions.isNotEmpty
+                ? const SliverToBoxAdapter(
+                    child: Divider(height: 0.5, thickness: 0.5))
+                : const SliverToBoxAdapter(child: SizedBox.shrink()),
+            positions.isNotEmpty
+                ? const InputPromocode()
+                : const SliverToBoxAdapter(child: SizedBox.shrink()),
             // const InfoAbotDelivery(),
           ],
         ),
