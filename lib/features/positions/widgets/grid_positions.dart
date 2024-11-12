@@ -15,8 +15,8 @@ class GridPositions extends StatelessWidget {
     return SliverGrid(
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
-          mainAxisSpacing: 10,
-          crossAxisSpacing: 20,
+          mainAxisSpacing: 15,
+          crossAxisSpacing: 15,
           mainAxisExtent: 215),
       delegate: SliverChildBuilderDelegate(
         (context, index) {

@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:snack_time/features/positions/bloc/position_list_bloc.dart';
 import 'package:snack_time/features/positions/widgets/widgets.dart';
 import 'package:snack_time/repositories/models.dart';
+import 'package:snack_time/ui/shared/widgets/base_container.dart';
 import 'package:snack_time/ui/shared/widgets/base_empty_list_widget.dart';
 
 @RoutePage()
@@ -78,6 +79,76 @@ class PositionsScreenState extends State<PositionsScreen> {
                       }
                       return const BaseEmptyListWidget();
                     },
+                  ),
+                ),
+              ),
+            ),
+            const SliverToBoxAdapter(
+              child: Padding(
+                padding: EdgeInsets.only(top: 5, left: 10.0),
+                child: Text(
+                  'Акции',
+                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400),
+                ),
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: SizedBox(
+                height: 150,
+                width: 80,
+                child: ListView.separated(
+                  padding: const EdgeInsets.all(10),
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 2,
+                  separatorBuilder: (context, index) =>
+                      const SizedBox(width: 10),
+                  itemBuilder: (context, index) => BaseContainer(
+                    color: const Color.fromARGB(255, 163, 247, 198),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          height: 50,
+                          width: 80,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            image: const DecorationImage(
+                                image:
+                                    AssetImage('assets/img/cofee+desert.jpg'),
+                                fit: BoxFit.cover),
+                          ),
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              '200 руб',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 13,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            Container(
+                              padding: const EdgeInsets.all(5),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: const Text(
+                                'Кофе + десерт',
+                                style: TextStyle(
+                                    color: Colors.black, fontSize: 10),
+                              ),
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),

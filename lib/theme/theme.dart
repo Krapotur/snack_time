@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 final primaryTheme = ThemeData(
   useMaterial3: true,
   cardColor: Colors.white,
-  scaffoldBackgroundColor: const Color.fromARGB(255, 255, 255, 255),
+  scaffoldBackgroundColor: const Color.fromARGB(255, 246, 246, 246),
   primaryColor: const Color.fromARGB(255, 33, 156, 84),
   hintColor: const Color.fromARGB(255, 147, 147, 147),
   highlightColor: const Color.fromARGB(255, 245, 245, 245),

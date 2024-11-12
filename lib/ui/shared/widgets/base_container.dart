@@ -12,13 +12,11 @@ class BaseContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        color: color,
-        borderRadius: BorderRadius.circular(18),
-      ),
-      height: 160,
-      width: 130,
-      child: Padding(padding: const EdgeInsets.all(10.0), child: child),
-    );
+        decoration: BoxDecoration(
+          color: color,
+          borderRadius: BorderRadius.circular(18),
+        ),
+        padding: const EdgeInsets.all(10.0).copyWith(bottom: 5),
+        child: child);
   }
 }
