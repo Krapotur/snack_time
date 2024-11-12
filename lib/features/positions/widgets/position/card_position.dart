@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:snack_time/features/cart/bloc/cart_bloc.dart';
@@ -24,9 +25,10 @@ class CardPosition extends StatefulWidget {
 class _CardPositionState extends State<CardPosition> {
   @override
   Widget build(BuildContext context) {
-    double turns = 0.0;
+    Position position = widget.positionsList[widget.index];
+    final theme = Theme.of(context);
     return BaseContainer(
-      color: Colors.white,
+      color: Theme.of(context).highlightColor,
       child: Column(
         children: [
           GestureDetector(
@@ -36,9 +38,8 @@ class _CardPositionState extends State<CardPosition> {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(18),
                 image: DecorationImage(
-                    image: NetworkImage(
-                        apiUrl + widget.positionsList[widget.index].imgSrc),
-                    fit: BoxFit.cover),
+                  image: CachedNetworkImageProvider(apiUrl + position.imgSrc),
+                ),
               ),
             ),
             onTap: () => showModalBottomSheet(
@@ -62,17 +63,15 @@ class _CardPositionState extends State<CardPosition> {
                         height: 230,
                         decoration: BoxDecoration(
                           border: Border(
-                            bottom: BorderSide(
-                                color: Theme.of(context).primaryColor,
-                                width: 5),
+                            bottom:
+                                BorderSide(color: theme.primaryColor, width: 5),
                           ),
                           borderRadius: const BorderRadiusDirectional.vertical(
                               top: Radius.circular(20)),
                           image: DecorationImage(
                             fit: BoxFit.cover,
-                            image: NetworkImage(
-                              apiUrl +
-                                  widget.positionsList[widget.index].imgSrc,
+                            image: CachedNetworkImageProvider(
+                              apiUrl + position.imgSrc,
                             ),
                           ),
                         ),
@@ -82,14 +81,10 @@ class _CardPositionState extends State<CardPosition> {
                               child: Container(
                                 padding: const EdgeInsets.all(3),
                                 decoration: BoxDecoration(
-                                    color: Theme.of(context).primaryColor,
+                                    color: theme.primaryColor,
                                     borderRadius: BorderRadius.circular(30)),
-                                child: AnimatedRotation(
-                                  duration: const Duration(seconds: 50),
-                                  turns: turns,
-                                  child: const Icon(Icons.close,
-                                      color: Colors.white),
-                                ),
+                                child: const Icon(Icons.close,
+                                    color: Colors.white),
                               )),
                           onTap: () {
                             AutoRouter.of(context).maybePop();
@@ -104,10 +99,20 @@ class _CardPositionState extends State<CardPosition> {
               ),
             ),
           ),
-          Text(
-            '${widget.positionsList[widget.index].price} руб.',
-            style: const TextStyle(
-                fontSize: 15, fontFamily: 'Lora', fontWeight: FontWeight.w700),
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                position.price.toString(),
+                style:
+                    const TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
+              ),
+              const Icon(
+                Icons.currency_ruble,
+                size: 17,
+                color: Colors.black,
+              )
+            ],
           ),
           Flexible(
             child: Text(
@@ -121,8 +126,7 @@ class _CardPositionState extends State<CardPosition> {
           Text(
               '${widget.positionsList[widget.index].weight}г + '
               '${widget.positionsList[widget.index].caloric}калл',
-              style:
-                  TextStyle(fontSize: 10, color: Theme.of(context).hintColor)),
+              style: TextStyle(fontSize: 10, color: theme.hintColor)),
           const SizedBox(height: 5),
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 18),
@@ -136,23 +140,48 @@ class _CardPositionState extends State<CardPosition> {
                   .where((x) => x.id == widget.positionsList[widget.index].id)
                   .toList();
               return SizedBox(
-                height: 30,
+                height: 35,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     GestureDetector(
-                        child: const Icon(Icons.remove_outlined),
+                        child: Container(
+                          padding: const EdgeInsets.all(3),
+                          decoration: BoxDecoration(
+                              color: Theme.of(context).primaryColor,
+                              borderRadius:
+                                  BorderRadiusDirectional.circular(30)),
+                          child: const Icon(
+                            Icons.remove_outlined,
+                            color: Colors.white,
+                            size: 20,
+                          ),
+                        ),
                         onTap: () {
                           BlocProvider.of<CartBloc>(context).add(
                               RemovePositionCartEvent(
                                   position:
                                       widget.positionsList[widget.index]));
                         }),
-                    Text(findPosition.isNotEmpty
-                        ? findPosition[0].quantityInCart.toString()
-                        : '0'),
+                    Text(
+                      findPosition.isNotEmpty
+                          ? findPosition[0].quantityInCart.toString()
+                          : '0',
+                      style: const TextStyle(fontSize: 16),
+                    ),
                     GestureDetector(
-                        child: const Icon(Icons.add),
+                        child: Container(
+                          padding: const EdgeInsets.all(3),
+                          decoration: BoxDecoration(
+                              color: Theme.of(context).primaryColor,
+                              borderRadius:
+                                  BorderRadiusDirectional.circular(30)),
+                          child: const Icon(
+                            Icons.add_outlined,
+                            color: Colors.white,
+                            size: 20,
+                          ),
+                        ),
                         onTap: () {
                           BlocProvider.of<CartBloc>(context).add(
                               AddPositionCartEvent(

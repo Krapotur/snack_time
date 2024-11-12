@@ -29,7 +29,7 @@ class ButtonAddCart extends StatelessWidget {
               borderRadius: BorderRadius.circular(50)),
           child: Center(
             child: Text(
-              'В корзину за ${widget.positionsList[widget.index].price}руб.',
+              'В корзину за ${widget.positionsList[widget.index].price} руб.',
               style: const TextStyle(color: Colors.white),
             ),
           ),

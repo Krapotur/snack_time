@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:snack_time/features/cart/widgets/widgets.dart';
+import 'package:snack_time/repositories/api_url.dart';
 import 'package:snack_time/repositories/positions/model/position.dart';
 
 class CardOrder extends StatelessWidget {
@@ -13,7 +14,6 @@ class CardOrder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String url = 'http://10.101.11.31:5000/';
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -28,7 +28,7 @@ class CardOrder extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadiusDirectional.circular(10),
                     image: DecorationImage(
-                        image: NetworkImage(url + positions[index].imgSrc),
+                        image: NetworkImage(apiUrl + positions[index].imgSrc),
                         fit: BoxFit.cover),
                   ),
                 ),

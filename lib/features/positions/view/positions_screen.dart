@@ -36,7 +36,7 @@ class PositionsScreenState extends State<PositionsScreen> {
           slivers: [
             SliverAppBar.medium(
               title: Text(
-                'ITALIANO R&K',
+                'VALENCIA R&K',
                 style: TextStyle(color: Theme.of(context).primaryColor),
               ),
               surfaceTintColor: Colors.white,
@@ -57,7 +57,7 @@ class PositionsScreenState extends State<PositionsScreen> {
                         return SizedBox(
                           height: 40,
                           child: ListView.builder(
-                              padding: EdgeInsets.zero,
+                              padding: const EdgeInsets.only(bottom: 2),
                               scrollDirection: Axis.horizontal,
                               itemCount: state.categoriesList.length,
                               itemBuilder: (context, index) {
@@ -96,8 +96,8 @@ class PositionsScreenState extends State<PositionsScreen> {
       decoration: BoxDecoration(
         color: categoryTitle == category.title
             ? Theme.of(context).primaryColor
-            : Theme.of(context).hintColor,
-        borderRadius: BorderRadius.circular(17),
+            : const Color.fromARGB(255, 201, 201, 201),
+        borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
             color: Colors.grey.withOpacity(0.5),

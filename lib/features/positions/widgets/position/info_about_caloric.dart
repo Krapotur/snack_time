@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:snack_time/features/positions/widgets/widgets.dart';
+import 'package:snack_time/repositories/positions/model/position.dart';
 
 class InfoAboutCaloric extends StatelessWidget {
   const InfoAboutCaloric({
@@ -11,6 +12,8 @@ class InfoAboutCaloric extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Position position = widget.positionsList[widget.index];
+
     final theme = Theme.of(context);
     return Container(
       padding: const EdgeInsets.all(10),
@@ -25,7 +28,7 @@ class InfoAboutCaloric extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('${widget.positionsList[widget.index].caloric.toString()}г',
+              Text('${position.caloric.toString()}г',
                   style: theme.textTheme.labelSmall),
               Text('ккал', style: theme.textTheme.labelSmall),
             ],
@@ -34,7 +37,7 @@ class InfoAboutCaloric extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('${widget.positionsList[widget.index].proteins.toString()}г',
+              Text('${position.proteins.toString()}г',
                   style: theme.textTheme.labelSmall),
               Text('белки', style: theme.textTheme.labelSmall),
             ],
@@ -43,7 +46,7 @@ class InfoAboutCaloric extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('${widget.positionsList[widget.index].fats.toString()}г',
+              Text('${position.fats.toString()}г',
                   style: theme.textTheme.labelSmall),
               Text('жиры', style: theme.textTheme.labelSmall),
             ],
@@ -52,7 +55,7 @@ class InfoAboutCaloric extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('${widget.positionsList[widget.index].carbs.toString()}г',
+              Text('${position.carbs.toString()}г',
                   style: theme.textTheme.labelSmall),
               Text('углеводы', style: theme.textTheme.labelSmall),
             ],

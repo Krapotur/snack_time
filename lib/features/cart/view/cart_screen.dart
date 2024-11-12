@@ -20,7 +20,11 @@ class _CartScreenState extends State<CartScreen> {
         return Column(
           children: [
             AppbarOrder(positions: state.cartPositions),
-            const Divider(height: 0.7, thickness: 0.7),
+            Divider(
+              height: 0.7,
+              thickness: 0.7,
+              color: Theme.of(context).primaryColor,
+            ),
             CardsList(positions: state.cartPositions),
             Container(
               width: double.infinity,
@@ -28,9 +32,12 @@ class _CartScreenState extends State<CartScreen> {
               decoration: const BoxDecoration(color: Colors.white),
               child: Column(
                 children: [
+                  Divider(
+                    height: 0.7,
+                    thickness: 0.7,
+                    color: Theme.of(context).primaryColor,
+                  ),
                   InfoAbotDelivery(positions: state.cartPositions),
-                  const Divider(height: 0.5, thickness: 0.5),
-                  const BottomNavbar(),
                 ],
               ),
             )

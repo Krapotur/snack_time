@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:snack_time/repositories/api_url.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:snack_time/repositories/models.dart';
 
 class CategoriesRepository {
@@ -8,6 +8,8 @@ class CategoriesRepository {
   CategoriesRepository({required this.dio});
 
   Future<List<Category>> getCategoriesList() async {
+    String apiUrl = dotenv.env['API_URL'] as String;
+
     List<Category> categoryList = [];
     final response = await dio.get('${apiUrl}api/categories');
     final dataList = response.data;

@@ -19,13 +19,25 @@ class RowPriceAndQuantity extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            positions[index].price.toString(),
-            style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                positions[index].price.toString(),
+                style:
+                    const TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
+              ),
+              const Icon(
+                Icons.currency_ruble,
+                size: 17,
+                color: Colors.black,
+              )
+            ],
           ),
           Container(
-            height: 25,
-            width: 70,
+            height: 35,
+            width: 95,
+            padding: const EdgeInsets.all(3),
             decoration: BoxDecoration(
               color: const Color.fromARGB(255, 227, 227, 227),
               borderRadius: BorderRadius.circular(20),
@@ -34,7 +46,16 @@ class RowPriceAndQuantity extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 GestureDetector(
-                    child: const Icon(Icons.remove_outlined),
+                    child: Container(
+                        padding: const EdgeInsets.all(3),
+                        decoration: BoxDecoration(
+                            color: Theme.of(context).primaryColor,
+                            borderRadius: BorderRadiusDirectional.circular(30)),
+                        child: const Icon(
+                          Icons.remove_outlined,
+                          color: Colors.white,
+                          size: 20,
+                        )),
                     onTap: () {
                       BlocProvider.of<CartBloc>(context).add(
                           RemovePositionCartEvent(position: positions[index]));
@@ -43,9 +64,19 @@ class RowPriceAndQuantity extends StatelessWidget {
                   positions[index].quantityInCart > 0
                       ? positions[index].quantityInCart.toString()
                       : '1',
+                  style: const TextStyle(fontSize: 16),
                 ),
                 GestureDetector(
-                    child: const Icon(Icons.add),
+                    child: Container(
+                        padding: const EdgeInsets.all(3),
+                        decoration: BoxDecoration(
+                            color: Theme.of(context).primaryColor,
+                            borderRadius: BorderRadiusDirectional.circular(30)),
+                        child: const Icon(
+                          Icons.add,
+                          color: Colors.white,
+                          size: 20,
+                        )),
                     onTap: () {
                       BlocProvider.of<CartBloc>(context).add(
                           AddPositionCartEvent(position: positions[index]));

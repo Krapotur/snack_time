@@ -11,7 +11,6 @@ class Position {
   final int carbs;
   final String imgSrc;
   final String category;
-  final String restaurant;
   int quantityInCart;
 
   Position(this.quantityInCart,
@@ -26,6 +25,5 @@ class Position {
       required this.fats,
       required this.carbs,
       required this.imgSrc,
-      required this.category,
-      required this.restaurant});
+      required this.category});
 }

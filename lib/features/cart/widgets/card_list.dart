@@ -21,22 +21,18 @@ class CardsList extends StatelessWidget {
               padding: const EdgeInsets.only(bottom: 8.0),
               sliver: SliverList.separated(
                 itemCount: positions.length,
-                separatorBuilder: (context, i) =>
-                    const Divider(height: 0.5, thickness: 0.5),
-                itemBuilder: (context, i) => Container(
-                  padding: const EdgeInsets.only(
-                      top: 10, left: 20, right: 20, bottom: 10),
-                  child: CardOrder(positions: positions, index: i),
+                separatorBuilder: (context, i) => const SizedBox(height: 2),
+                itemBuilder: (context, i) => Card(
+                  color: const Color.fromARGB(255, 249, 249, 249),
+                  child: Container(
+                    padding: const EdgeInsets.only(
+                        top: 10, left: 20, right: 20, bottom: 10),
+                    child: CardOrder(positions: positions, index: i),
+                  ),
                 ),
               ),
             ),
-            positions.isNotEmpty
-                ? const SliverToBoxAdapter(
-                    child: Divider(height: 0.5, thickness: 0.5))
-                : const SliverToBoxAdapter(child: SizedBox.shrink()),
-            positions.isNotEmpty
-                ? const InputPromocode()
-                : const SliverToBoxAdapter(child: SizedBox.shrink()),
+
             // const InfoAbotDelivery(),
           ],
         ),

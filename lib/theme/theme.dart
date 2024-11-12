@@ -5,8 +5,8 @@ final primaryTheme = ThemeData(
   cardColor: Colors.white,
   scaffoldBackgroundColor: const Color.fromARGB(255, 255, 255, 255),
   primaryColor: const Color.fromARGB(255, 33, 156, 84),
-  hintColor: Colors.black12,
-  highlightColor: const Color.fromARGB(255, 243, 243, 243),
+  hintColor: const Color.fromARGB(255, 147, 147, 147),
+  highlightColor: const Color.fromARGB(255, 245, 245, 245),
   dividerTheme: const DividerThemeData(color: Colors.grey),
   iconTheme: const IconThemeData(color: Colors.grey),
   progressIndicatorTheme: const ProgressIndicatorThemeData(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:snack_time/features/positions/widgets/widgets.dart';
+import 'package:snack_time/repositories/models.dart';
 
 class DescriptionPosition extends StatelessWidget {
   const DescriptionPosition({
@@ -11,6 +12,7 @@ class DescriptionPosition extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Position position = widget.positionsList[widget.index];
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(30),
@@ -18,14 +20,14 @@ class DescriptionPosition extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            widget.positionsList[widget.index].title,
+            position.title,
             style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w700,
             ),
           ),
           Text(
-            '${widget.positionsList[widget.index].weight}г',
+            '${position.weight}г',
             style: TextStyle(fontSize: 13, color: Theme.of(context).hintColor),
           ),
           const SizedBox(height: 15),
@@ -37,7 +39,7 @@ class DescriptionPosition extends StatelessWidget {
                 style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
               ),
               Text(
-                widget.positionsList[widget.index].composition,
+                position.composition,
                 style: const TextStyle(fontSize: 12),
               ),
             ],
