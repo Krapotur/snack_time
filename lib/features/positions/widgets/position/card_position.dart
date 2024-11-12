@@ -130,20 +130,10 @@ class _CardPositionState extends State<CardPosition> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            position.price.toString(),
-                            style: const TextStyle(
-                                fontWeight: FontWeight.w700, fontSize: 16),
-                          ),
-                          const Icon(
-                            Icons.currency_ruble,
-                            size: 17,
-                            color: Colors.black,
-                          )
-                        ],
+                      Text(
+                        '${position.price.toString()} руб',
+                        style: const TextStyle(
+                            fontWeight: FontWeight.w700, fontSize: 16),
                       ),
                       GestureDetector(
                           child: Container(

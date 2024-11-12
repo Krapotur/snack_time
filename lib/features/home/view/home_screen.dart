@@ -38,11 +38,20 @@ class _HomeScreenState extends State<HomeScreen> {
             onTap: (index) => _openPage(index, tabsRouter),
             currentIndex: tabsRouter.activeIndex,
             selectedItemColor: Theme.of(context).primaryColor,
+            selectedIconTheme: const IconThemeData(size: 25),
             items: const [
               BottomNavigationBarItem(
-                  icon: Icon(Icons.fastfood), label: 'Меню'),
+                  icon: Icon(
+                    Icons.fastfood,
+                    size: 20,
+                  ),
+                  label: 'Меню'),
               BottomNavigationBarItem(
-                  icon: Icon(Icons.account_circle_sharp), label: 'Профиль')
+                  icon: Icon(
+                    Icons.account_circle_sharp,
+                    size: 20,
+                  ),
+                  label: 'Профиль')
             ],
           ),
           floatingActionButton:
