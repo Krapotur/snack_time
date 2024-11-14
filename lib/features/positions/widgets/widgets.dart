@@ -1,4 +1,6 @@
 export './events_widget.dart';
+export './karusel_category.dart';
+export './offers_widget.dart';
 export './position_list_view.dart';
 export 'grid_positions.dart';
 export 'info_contacts.dart';

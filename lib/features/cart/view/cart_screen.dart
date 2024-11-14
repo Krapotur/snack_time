@@ -15,6 +15,8 @@ class CartScreen extends StatefulWidget {
 class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return BlocBuilder<CartBloc, CartState>(
       builder: (context, state) {
         return Column(
@@ -23,7 +25,7 @@ class _CartScreenState extends State<CartScreen> {
             Divider(
               height: 0.7,
               thickness: 0.7,
-              color: Theme.of(context).primaryColor,
+              color: theme.primaryColor,
             ),
             CardsList(positions: state.cartPositions),
             Container(
@@ -35,12 +37,13 @@ class _CartScreenState extends State<CartScreen> {
                   Divider(
                     height: 0.7,
                     thickness: 0.7,
-                    color: Theme.of(context).primaryColor,
+                    color: theme.primaryColor,
                   ),
+                  const ButtonSubmit(),
                   InfoAbotDelivery(positions: state.cartPositions),
                 ],
               ),
-            )
+            ),
           ],
         );
       },

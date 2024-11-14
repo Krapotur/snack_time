@@ -35,7 +35,7 @@ class AppbarOrder extends StatelessWidget {
               ),
               const SizedBox(height: 5),
               Text(
-                '"Valencia R&K"',
+                '"Italiano R&K"',
                 style:
                     theme.textTheme.titleMedium?.copyWith(color: Colors.grey),
               ),

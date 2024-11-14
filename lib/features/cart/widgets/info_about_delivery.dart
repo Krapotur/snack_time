@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:snack_time/features/cart/widgets/input_promocode.dart';
 import 'package:snack_time/repositories/positions/model/position.dart';
 
 class InfoAbotDelivery extends StatelessWidget {
@@ -18,9 +17,6 @@ class InfoAbotDelivery extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          positions.isNotEmpty
-              ? const InputPromocode()
-              : const SizedBox.shrink(),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
