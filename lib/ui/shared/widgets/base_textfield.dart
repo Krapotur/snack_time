@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 // import 'package:shared_preferences/shared_preferences.dart';
 
 class BaseTextfield extends StatefulWidget {
@@ -7,9 +8,15 @@ class BaseTextfield extends StatefulWidget {
     required this.textController,
     required this.hintText,
     required this.onTap,
+    required this.height,
+    required this.maxLength,
+    required this.isNumber,
   });
   final TextEditingController? textController;
   final String hintText;
+  final double height;
+  final int maxLength;
+  final bool isNumber;
   final void Function() onTap;
 
   @override
@@ -21,10 +28,16 @@ class _BaseTextfieldState extends State<BaseTextfield> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return SizedBox(
-      height: 50,
+      height: widget.height,
       child: TextField(
         maxLines: 5,
-        maxLength: 40,
+        maxLength: widget.maxLength,
+        keyboardType: TextInputType.number,
+        inputFormatters: widget.isNumber
+            ? [
+                FilteringTextInputFormatter.allow(RegExp(r'^\-?(\d+\.?\d*)?')),
+              ]
+            : [],
         controller: widget.textController,
         cursorColor: theme.primaryColor,
         style:
@@ -49,7 +62,7 @@ class _BaseTextfieldState extends State<BaseTextfield> {
             borderSide: BorderSide(color: theme.primaryColor, width: 1.0),
           ),
           contentPadding:
-              const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+              const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
         ),
         onChanged: (value) => widget.onTap(),
         onTapOutside: (_) => FocusScope.of(context).unfocus(),

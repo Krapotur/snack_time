@@ -25,7 +25,6 @@ class CardsList extends StatelessWidget {
               itemCount: positions.length,
               separatorBuilder: (context, i) => const SizedBox(height: 2),
               itemBuilder: (context, i) => Card(
-                color: const Color.fromARGB(255, 255, 255, 255),
                 child: Container(
                   padding: const EdgeInsets.only(
                       top: 10, left: 20, right: 20, bottom: 10),

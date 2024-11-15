@@ -17,6 +17,10 @@ final primaryTheme = ThemeData(
       iconTheme: IconThemeData(color: Colors.white),
       color: Colors.white,
       centerTitle: true),
+  cardTheme: const CardTheme(
+    surfaceTintColor: Colors.white,
+    color: Colors.white,
+  ),
   fontFamily: 'Lora',
   textTheme: const TextTheme(
     titleMedium: TextStyle(
