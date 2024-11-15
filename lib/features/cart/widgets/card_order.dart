@@ -43,7 +43,7 @@ class CardOrder extends StatelessWidget {
                       positions[index].title,
                       style: const TextStyle(
                         fontWeight: FontWeight.w600,
-                        fontSize: 16,
+                        fontSize: 15,
                       ),
                     ),
                     Text(

@@ -13,7 +13,10 @@ final primaryTheme = ThemeData(
       color: Color.fromARGB(255, 29, 218, 108)),
   colorScheme:
       ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 29, 218, 108)),
-  appBarTheme: const AppBarTheme(backgroundColor: Colors.white),
+  appBarTheme: const AppBarTheme(
+      iconTheme: IconThemeData(color: Colors.white),
+      color: Colors.white,
+      centerTitle: true),
   fontFamily: 'Lora',
   textTheme: const TextTheme(
     titleMedium: TextStyle(

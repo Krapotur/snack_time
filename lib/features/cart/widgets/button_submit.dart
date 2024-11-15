@@ -1,9 +1,14 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:snack_time/repositories/models.dart';
+import 'package:snack_time/router/router.gr.dart';
 
 class ButtonSubmit extends StatelessWidget {
   const ButtonSubmit({
     super.key,
+    required this.positions,
   });
+  final List<Position> positions;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +30,8 @@ class ButtonSubmit extends StatelessWidget {
           ),
         ),
       ),
-      onTap: () => {},
+      onTap: () => AutoRouter.of(context)
+          .push(RegistrationOrderRoute(positions: positions)),
     );
   }
 }

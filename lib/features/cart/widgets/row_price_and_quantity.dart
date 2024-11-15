@@ -19,20 +19,9 @@ class RowPriceAndQuantity extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                positions[index].price.toString(),
-                style:
-                    const TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
-              ),
-              const Icon(
-                Icons.currency_ruble,
-                size: 17,
-                color: Colors.black,
-              )
-            ],
+          Text(
+            '${positions[index].price.toString()} руб',
+            style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
           ),
           Container(
             height: 35,

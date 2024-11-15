@@ -1,8 +1,9 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:snack_time/features/cart/cart.dart';
 import 'package:snack_time/repositories/models.dart';
+import 'package:snack_time/router/router.gr.dart';
 
 class FloatActionButton extends StatelessWidget {
   const FloatActionButton({
@@ -45,15 +46,7 @@ class FloatActionButton extends StatelessWidget {
           ),
         ),
       ),
-      onTap: () => showModalBottomSheet(
-        isScrollControlled: true,
-        backgroundColor: Colors.transparent,
-        context: context,
-        builder: (context) => const Padding(
-          padding: EdgeInsets.only(top: 60.0),
-          child: CartScreen(),
-        ),
-      ),
+      onTap: () => AutoRouter.of(context).push(const CartRoute()),
     );
   }
 

@@ -15,6 +15,8 @@ class PositionsScreen extends StatefulWidget {
 }
 
 class PositionsScreenState extends State<PositionsScreen> {
+  TextEditingController controller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
