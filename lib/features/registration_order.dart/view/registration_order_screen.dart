@@ -23,12 +23,14 @@ class _RegistrationOrderScreenState extends State<RegistrationOrderScreen> {
   bool isFaster = false;
   bool isTime = false;
   bool isEdit = true;
+  bool isActiveKeyboard = false;
 
   final TextEditingController _cityController = TextEditingController();
   final TextEditingController _streetController = TextEditingController();
   final TextEditingController _commentController = TextEditingController();
   final TextEditingController _recipientController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
+  final TextEditingController promocodeController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +44,8 @@ class _RegistrationOrderScreenState extends State<RegistrationOrderScreen> {
         backgroundColor: theme.primaryColor,
       ),
       body: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10)
+            .copyWith(bottom: 0),
         child: ListView(
           children: [
             Center(
@@ -54,10 +57,10 @@ class _RegistrationOrderScreenState extends State<RegistrationOrderScreen> {
                 isSelected: isSelected,
                 children: const [Text('В ресторане'), Text('Доставка')],
                 onPressed: (index) {
+                  for (var i = 0; i < isSelected.length; i++) {
+                    isSelected[i] = false;
+                  }
                   setState(() {
-                    for (var i = 0; i < isSelected.length; i++) {
-                      isSelected[i] = false;
-                    }
                     isSelected[index] = !isSelected[index];
                   });
                 },
@@ -219,6 +222,47 @@ class _RegistrationOrderScreenState extends State<RegistrationOrderScreen> {
                   )
                 : const SizedBox.shrink(),
             const SizedBox(height: 20),
+            _streetController.text.isNotEmpty && _cityController.text.isNotEmpty
+                ? Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(' Оплата:'),
+                      const SizedBox(height: 5),
+                      Card(
+                        child: Padding(
+                          padding: const EdgeInsets.all(15),
+                          child: DropdownMenu(
+                            expandedInsets: const EdgeInsets.all(2),
+                            label: const Text('Способ оплаты',
+                                style: TextStyle(fontSize: 15)),
+                            // controller: _cityController,
+                            menuHeight: 200,
+                            menuStyle: MenuStyle(
+                              backgroundColor:
+                                  WidgetStateProperty.all(Colors.white),
+                            ),
+                            inputDecorationTheme: InputDecorationTheme(
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                    color: Color.fromARGB(255, 220, 220, 220)),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                            ),
+                            dropdownMenuEntries: const <DropdownMenuEntry<
+                                String>>[
+                              DropdownMenuEntry(
+                                  value: 'cash', label: 'Наличными'),
+                              DropdownMenuEntry(
+                                  value: 'pay', label: 'По карте'),
+                            ],
+                            // onSelected: (_) => onTap(),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                    ],
+                  )
+                : const SizedBox.shrink(),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -267,10 +311,32 @@ class _RegistrationOrderScreenState extends State<RegistrationOrderScreen> {
                 ),
               ],
             ),
+            GestureDetector(
+              child: Text(
+                'У меня есть промокод!',
+                style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).primaryColor,
+                    decoration: TextDecoration.underline,
+                    decorationColor: Colors.green),
+                textAlign: TextAlign.center,
+              ),
+              onTap: () => _showDialog(context, promocodeController),
+            ),
+            const SizedBox(height: 30),
           ],
         ),
       ),
       bottomNavigationBar: InfoAbotDelivery(positions: widget.positions),
+      floatingActionButton: MediaQuery.of(context).viewInsets.bottom == 0
+          ? GestureDetector(
+              child: BaseButtonSubmit(
+                  title: 'Отправить', positions: widget.positions),
+              onTap: () => AutoRouter.of(context).back(),
+            )
+          : const SizedBox.shrink(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 
@@ -282,5 +348,31 @@ class _RegistrationOrderScreenState extends State<RegistrationOrderScreen> {
     setState(() {
       isEdit = true;
     });
+  }
+
+  void _showDialog(BuildContext context, TextEditingController controller) {
+    final theme = Theme.of(context);
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: Colors.white,
+        surfaceTintColor: Colors.white,
+        content: Stack(alignment: Alignment.topRight, children: [
+          InputPromocode(controller: controller),
+          GestureDetector(
+            child: Container(
+              padding: const EdgeInsets.all(3),
+              decoration: BoxDecoration(
+                  color: theme.primaryColor,
+                  borderRadius: BorderRadius.circular(30)),
+              child: const Icon(Icons.close, size: 15, color: Colors.white),
+            ),
+            onTap: () {
+              AutoRouter.of(context).maybePop();
+            },
+          ),
+        ]),
+      ),
+    );
   }
 }

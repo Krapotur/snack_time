@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:snack_time/features/cart/bloc/cart_bloc.dart';
 import 'package:snack_time/features/cart/widgets/widgets.dart';
 import 'package:snack_time/repositories/models.dart';
+import 'package:snack_time/router/router.gr.dart';
 
 @RoutePage()
 class CartScreen extends StatefulWidget {
@@ -39,31 +40,24 @@ class _CartScreenState extends State<CartScreen> {
               children: [
                 const SizedBox(height: 10),
                 Text(
-                  ' Товары ${positions.length} на ${_getSum(positions)} рублей',
+                  ' Товары ${_getQuantityPositions(positions)} на ${_getSum(positions)} рублей',
                   style: const TextStyle(
                       fontSize: 16, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 10),
                 CardsList(positions: state.cartPositions),
-                Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.only(bottom: 5),
-                  decoration: const BoxDecoration(color: Colors.white),
-                  child: Column(
-                    children: [
-                      Divider(
-                        height: 0.7,
-                        thickness: 0.7,
-                        color: theme.primaryColor,
-                      ),
-                      ButtonSubmit(positions: positions),
-                      InfoAbotDelivery(positions: state.cartPositions),
-                    ],
-                  ),
-                ),
               ],
             ),
           ),
+          bottomNavigationBar: InfoAbotDelivery(positions: state.cartPositions),
+          floatingActionButton: GestureDetector(
+            child:
+                BaseButtonSubmit(title: 'Оформить заказ', positions: positions),
+            onTap: () => AutoRouter.of(context)
+                .push(RegistrationOrderRoute(positions: positions)),
+          ),
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerDocked,
         );
       },
     );
@@ -73,6 +67,15 @@ class _CartScreenState extends State<CartScreen> {
     int summ = 0;
     for (var position in positions) {
       summ += position.quantityInCart * position.price;
+    }
+    return summ;
+  }
+
+  int _getQuantityPositions(List<Position> positions) {
+    int summ = 0;
+
+    for (var position in positions) {
+      summ += position.quantityInCart;
     }
     return summ;
   }

@@ -14,7 +14,6 @@ class DropMenuCities extends StatelessWidget {
   Widget build(BuildContext context) {
     return DropdownMenu(
       expandedInsets: const EdgeInsets.all(2),
-      hintText: 'Выберите город',
       label: const Text('Город', style: TextStyle(fontSize: 15)),
       controller: _cityController,
       menuHeight: 200,
