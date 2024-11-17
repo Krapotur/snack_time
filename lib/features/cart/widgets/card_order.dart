@@ -14,6 +14,7 @@ class CardOrder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Position position = positions[index];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -23,12 +24,12 @@ class CardOrder extends StatelessWidget {
             Row(
               children: [
                 Container(
-                  height: 80,
-                  width: 80,
+                  height: 60,
+                  width: 60,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadiusDirectional.circular(10),
                     image: DecorationImage(
-                        image: NetworkImage(apiUrl + positions[index].imgSrc),
+                        image: NetworkImage(apiUrl + position.imgSrc),
                         fit: BoxFit.cover),
                   ),
                 ),
@@ -40,15 +41,15 @@ class CardOrder extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      positions[index].title,
+                      position.title,
                       style: const TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 15,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 13,
                       ),
                     ),
                     Text(
-                      '${positions[index].weight} г',
-                      style: const TextStyle(fontSize: 14, color: Colors.grey),
+                      '${position.weight}г',
+                      style: const TextStyle(fontSize: 12, color: Colors.grey),
                     ),
                   ],
                 ),

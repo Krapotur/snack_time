@@ -14,18 +14,19 @@ class RowPriceAndQuantity extends StatelessWidget {
   final int index;
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    Position position = positions[index];
     return SizedBox(
       width: double.infinity,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            '${positions[index].price.toString()} руб',
-            style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+            '${position.price.toString()} руб',
+            style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
           ),
           Container(
             height: 35,
-            width: 95,
             padding: const EdgeInsets.all(3),
             decoration: BoxDecoration(
               color: const Color.fromARGB(255, 227, 227, 227),
@@ -36,40 +37,47 @@ class RowPriceAndQuantity extends StatelessWidget {
               children: [
                 GestureDetector(
                     child: Container(
+                        margin: const EdgeInsets.symmetric(horizontal: 6),
                         padding: const EdgeInsets.all(3),
                         decoration: BoxDecoration(
-                            color: Theme.of(context).primaryColor,
+                            color: theme.primaryColor,
                             borderRadius: BorderRadiusDirectional.circular(30)),
                         child: const Icon(
                           Icons.remove_outlined,
                           color: Colors.white,
-                          size: 20,
+                          size: 17,
                         )),
                     onTap: () {
-                      BlocProvider.of<CartBloc>(context).add(
-                          RemovePositionCartEvent(position: positions[index]));
+                      BlocProvider.of<CartBloc>(context)
+                          .add(RemovePositionCartEvent(position: position));
                     }),
                 Text(
-                  positions[index].quantityInCart > 0
-                      ? positions[index].quantityInCart.toString()
+                  position.quantityInCart > 0
+                      ? position.quantityInCart.toString()
                       : '1',
                   style: const TextStyle(fontSize: 16),
                 ),
-                GestureDetector(
-                    child: Container(
-                        padding: const EdgeInsets.all(3),
-                        decoration: BoxDecoration(
-                            color: Theme.of(context).primaryColor,
-                            borderRadius: BorderRadiusDirectional.circular(30)),
-                        child: const Icon(
-                          Icons.add,
-                          color: Colors.white,
-                          size: 20,
-                        )),
-                    onTap: () {
-                      BlocProvider.of<CartBloc>(context).add(
-                          AddPositionCartEvent(position: positions[index]));
-                    }),
+                BlocBuilder<CartBloc, CartState>(
+                  builder: (context, state) {
+                    return GestureDetector(
+                        child: Container(
+                            margin: const EdgeInsets.symmetric(horizontal: 6),
+                            padding: const EdgeInsets.all(3),
+                            decoration: BoxDecoration(
+                                color: theme.primaryColor,
+                                borderRadius:
+                                    BorderRadiusDirectional.circular(30)),
+                            child: const Icon(
+                              Icons.add,
+                              color: Colors.white,
+                              size: 17,
+                            )),
+                        onTap: () {
+                          BlocProvider.of<CartBloc>(context)
+                              .add(AddPositionCartEvent(position: position));
+                        });
+                  },
+                ),
               ],
             ),
           ),

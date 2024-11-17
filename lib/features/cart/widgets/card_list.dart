@@ -17,7 +17,7 @@ class CardsList extends StatelessWidget {
 
     return Expanded(
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 5).copyWith(bottom: 5),
+        padding: const EdgeInsets.only(bottom: 5),
         decoration: const BoxDecoration(color: Colors.white),
         child: CustomScrollView(
           slivers: [

@@ -32,7 +32,8 @@ class _BaseTextfieldState extends State<BaseTextfield> {
       child: TextField(
         maxLines: 5,
         maxLength: widget.maxLength,
-        keyboardType: TextInputType.number,
+        keyboardType:
+            widget.isNumber ? TextInputType.phone : TextInputType.text,
         inputFormatters: widget.isNumber
             ? [
                 FilteringTextInputFormatter.allow(RegExp(r'^\-?(\d+\.?\d*)?')),
