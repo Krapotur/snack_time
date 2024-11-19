@@ -138,63 +138,64 @@ class _CardPositionState extends State<CardPosition> {
                       BlocBuilder<CartBloc, CartState>(
                         builder: (context, state) {
                           return GestureDetector(
-                              child: Container(
-                                padding: const EdgeInsets.all(3),
-                                decoration: BoxDecoration(
-                                    color: Theme.of(context).primaryColor,
-                                    borderRadius:
-                                        BorderRadiusDirectional.circular(30)),
-                                child: const Icon(
-                                  Icons.add_outlined,
-                                  color: Colors.white,
-                                  size: 28,
-                                ),
+                            child: Container(
+                              padding: const EdgeInsets.all(3),
+                              decoration: BoxDecoration(
+                                  color: Theme.of(context).primaryColor,
+                                  borderRadius:
+                                      BorderRadiusDirectional.circular(30)),
+                              child: const Icon(
+                                Icons.add_outlined,
+                                color: Colors.white,
+                                size: 28,
                               ),
-                              onTap: () {
-                                int summQuantityorders = 0;
-                                for (var x in state.cartPositions) {
-                                  summQuantityorders += x.quantityInCart;
-                                }
-                                if (summQuantityorders >= 20) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                      backgroundColor:
-                                          Color.fromARGB(255, 173, 62, 62),
-                                      duration: Duration(seconds: 5),
-                                      content: Text(
-                                        'Корзина переполнена!',
-                                        style: TextStyle(color: Colors.white),
-                                      ),
+                            ),
+                            onTap: () {
+                              int summQuantityorders = 0;
+                              for (var x in state.cartPositions) {
+                                summQuantityorders += x.quantityInCart;
+                              }
+                              if (summQuantityorders >= 20) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    backgroundColor:
+                                        Color.fromARGB(255, 173, 62, 62),
+                                    duration: Duration(seconds: 5),
+                                    content: Text(
+                                      'Корзина переполнена!',
+                                      style: TextStyle(color: Colors.white),
                                     ),
-                                  );
-                                } else if (position.quantityInCart >= 5) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                      backgroundColor:
-                                          Color.fromARGB(255, 173, 62, 62),
-                                      duration: Duration(seconds: 5),
-                                      content: Text(
-                                        'Количество заказов ограничено. \nЕсли требуется больше, сделайте дополнительный заказ или позвоните в ресторан по телефону: +7 905 456 24 54',
-                                        style: TextStyle(color: Colors.white),
-                                      ),
+                                  ),
+                                );
+                              } else if (position.quantityInCart >= 5) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    backgroundColor:
+                                        Color.fromARGB(255, 173, 62, 62),
+                                    duration: Duration(seconds: 5),
+                                    content: Text(
+                                      'Количество заказов ограничено. \nЕсли требуется больше, сделайте дополнительный заказ или позвоните в ресторан по телефону: +7 905 456 24 54',
+                                      style: TextStyle(color: Colors.white),
                                     ),
-                                  );
-                                } else {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      backgroundColor: theme.primaryColor,
-                                      duration: const Duration(seconds: 1),
-                                      content: Text(
-                                        '${position.title} добавлен(а) в корзину',
-                                        style: const TextStyle(
-                                            color: Colors.white),
-                                      ),
+                                  ),
+                                );
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    backgroundColor: theme.primaryColor,
+                                    duration: const Duration(seconds: 1),
+                                    content: Text(
+                                      '${position.title} добавлен(а) в корзину',
+                                      style:
+                                          const TextStyle(color: Colors.white),
                                     ),
-                                  );
-                                  BlocProvider.of<CartBloc>(context).add(
-                                      AddPositionCartEvent(position: position));
-                                }
-                              });
+                                  ),
+                                );
+                                BlocProvider.of<CartBloc>(context).add(
+                                    AddPositionCartEvent(position: position));
+                              }
+                            },
+                          );
                         },
                       ),
                     ],

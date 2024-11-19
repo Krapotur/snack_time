@@ -24,10 +24,15 @@ class _RegistrationOrderScreenState extends State<RegistrationOrderScreen> {
   bool isTime = false;
   bool isEdit = true;
   bool isActiveKeyboard = false;
+  String _comment = '';
+  String _descriptionPay = '';
 
   final TextEditingController _cityController = TextEditingController();
   final TextEditingController _streetController = TextEditingController();
   final TextEditingController _commentController = TextEditingController();
+  final TextEditingController _payController = TextEditingController();
+  final TextEditingController _changeFromAmountController =
+      TextEditingController();
   final TextEditingController _recipientController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController promocodeController = TextEditingController();
@@ -45,6 +50,8 @@ class _RegistrationOrderScreenState extends State<RegistrationOrderScreen> {
       ),
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10)
+            .copyWith(
+                bottom: MediaQuery.of(context).viewInsets.bottom != 0 ? 100 : 0)
             .copyWith(bottom: 0),
         child: ListView(
           children: [
@@ -231,31 +238,70 @@ class _RegistrationOrderScreenState extends State<RegistrationOrderScreen> {
                       Card(
                         child: Padding(
                           padding: const EdgeInsets.all(15),
-                          child: DropdownMenu(
-                            expandedInsets: const EdgeInsets.all(2),
-                            label: const Text('Способ оплаты',
-                                style: TextStyle(fontSize: 15)),
-                            // controller: _cityController,
-                            menuHeight: 200,
-                            menuStyle: MenuStyle(
-                              backgroundColor:
-                                  WidgetStateProperty.all(Colors.white),
-                            ),
-                            inputDecorationTheme: InputDecorationTheme(
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                    color: Color.fromARGB(255, 220, 220, 220)),
-                                borderRadius: BorderRadius.circular(10),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              DropdownMenu(
+                                expandedInsets: const EdgeInsets.all(2),
+                                label: const Text('Способ оплаты',
+                                    style: TextStyle(fontSize: 15)),
+                                controller: _payController,
+                                menuHeight: 200,
+                                menuStyle: MenuStyle(
+                                  backgroundColor:
+                                      WidgetStateProperty.all(Colors.white),
+                                ),
+                                inputDecorationTheme: InputDecorationTheme(
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                        color:
+                                            Color.fromARGB(255, 220, 220, 220)),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                ),
+                                dropdownMenuEntries: const <DropdownMenuEntry<
+                                    String>>[
+                                  DropdownMenuEntry(
+                                      value: 'cash', label: 'Наличными'),
+                                  DropdownMenuEntry(
+                                      value: 'pay', label: 'По карте'),
+                                ],
+                                onSelected: (value) {
+                                  if (value == 'pay') {
+                                    _descriptionPay =
+                                        '*Для оплаты картой, у курьера будет с собой банковский терминал';
+                                  } else {
+                                    _descriptionPay =
+                                        '*Пожалуйста укажите сумму, с которой курьер должен вернуть сдачу';
+                                  }
+                                  setState(() {});
+                                },
                               ),
-                            ),
-                            dropdownMenuEntries: const <DropdownMenuEntry<
-                                String>>[
-                              DropdownMenuEntry(
-                                  value: 'cash', label: 'Наличными'),
-                              DropdownMenuEntry(
-                                  value: 'pay', label: 'По карте'),
+                              SizedBox(
+                                height:
+                                    _payController.text == 'Наличными' ? 10 : 0,
+                              ),
+                              _payController.text == 'Наличными'
+                                  ? BaseTextfield(
+                                      textController:
+                                          _changeFromAmountController,
+                                      hintText: 'Укажите сумму',
+                                      height: 45,
+                                      maxLength: 6,
+                                      isNumber: true,
+                                      onTap: _callSetState)
+                                  : const SizedBox.shrink(),
+                              _descriptionPay.isNotEmpty
+                                  ? Flexible(
+                                      child: Text(
+                                        _descriptionPay,
+                                        style: TextStyle(
+                                            fontSize: 10,
+                                            color: theme.primaryColor),
+                                      ),
+                                    )
+                                  : const SizedBox.shrink(),
                             ],
-                            // onSelected: (_) => onTap(),
                           ),
                         ),
                       ),
@@ -300,17 +346,100 @@ class _RegistrationOrderScreenState extends State<RegistrationOrderScreen> {
               children: [
                 const Text(' Комментарий к заказу:'),
                 const SizedBox(height: 3),
-                Card(
-                  child: BaseTextfield(
-                      textController: _commentController,
-                      hintText: '',
-                      height: 100,
-                      maxLength: 150,
-                      isNumber: false,
-                      onTap: _callSetState),
+                GestureDetector(
+                  child: Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(17),
+                        color: Colors.white),
+                    child: Text(
+                      _comment.isEmpty
+                          ? 'добавить комментарий'
+                          : _commentController.text,
+                      style: TextStyle(
+                          color: _commentController.text.isEmpty
+                              ? theme.hintColor
+                              : Colors.black87),
+                    ),
+                  ),
+                  onTap: () => showModalBottomSheet(
+                    backgroundColor: Colors.white,
+                    context: context,
+                    builder: (context) => Container(
+                      padding: const EdgeInsets.symmetric(
+                              horizontal: 10.0, vertical: 10)
+                          .copyWith(
+                              bottom: MediaQuery.of(context).viewInsets.bottom),
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(1),
+                            topRight: Radius.circular(1)),
+                      ),
+                      child: Stack(
+                        alignment: AlignmentDirectional.topEnd,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              const SizedBox(height: 25),
+                              BaseTextfield(
+                                  textController: _commentController,
+                                  hintText: 'Ваш комментарий...',
+                                  height: 60,
+                                  maxLength: 150,
+                                  isNumber: false,
+                                  onTap: _callSetState),
+                              const SizedBox(height: 10),
+                              GestureDetector(
+                                child: Container(
+                                  height: 35,
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 15),
+                                  decoration: BoxDecoration(
+                                      color: theme.primaryColor,
+                                      borderRadius:
+                                          BorderRadiusDirectional.circular(10)),
+                                  child: const Center(
+                                    child: Text(
+                                      'Сохранить',
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 12),
+                                    ),
+                                  ),
+                                ),
+                                onTap: () {
+                                  setState(() {
+                                    _comment = _commentController.text;
+                                  });
+                                  AutoRouter.of(context).maybePop();
+                                },
+                              ),
+                              const SizedBox(height: 15),
+                            ],
+                          ),
+                          GestureDetector(
+                            child: Container(
+                              padding: const EdgeInsets.all(3),
+                              decoration: BoxDecoration(
+                                  color: theme.primaryColor,
+                                  borderRadius: BorderRadius.circular(30)),
+                              child: const Icon(Icons.close,
+                                  size: 15, color: Colors.white),
+                            ),
+                            onTap: () {
+                              AutoRouter.of(context).maybePop();
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                 ),
               ],
             ),
+            const SizedBox(height: 10),
             GestureDetector(
               child: Text(
                 'У меня есть промокод!',
@@ -332,7 +461,7 @@ class _RegistrationOrderScreenState extends State<RegistrationOrderScreen> {
       floatingActionButton: MediaQuery.of(context).viewInsets.bottom == 0
           ? GestureDetector(
               child: BaseButtonSubmit(
-                  title: 'Отправить', positions: widget.positions),
+                  title: 'Заказать', positions: widget.positions),
               onTap: () => AutoRouter.of(context).back(),
             )
           : const SizedBox.shrink(),

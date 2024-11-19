@@ -56,7 +56,11 @@ class _BaseTextfieldState extends State<BaseTextfield> {
           border: const OutlineInputBorder(),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(color: Colors.grey.shade100, width: 1.0),
+            borderSide: BorderSide(
+                color: widget.textController!.text.isEmpty
+                    ? Colors.red
+                    : Colors.grey.shade100,
+                width: 1.0),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
@@ -65,7 +69,7 @@ class _BaseTextfieldState extends State<BaseTextfield> {
           contentPadding:
               const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
         ),
-        onChanged: (value) => widget.onTap(),
+        onChanged: (_) => widget.onTap(),
         onTapOutside: (_) => FocusScope.of(context).unfocus(),
       ),
     );
