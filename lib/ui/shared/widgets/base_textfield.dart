@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
+import 'package:snack_time/features/registration_order.dart/provider/provider.dart';
 // import 'package:shared_preferences/shared_preferences.dart';
 
 class BaseTextfield extends StatefulWidget {
@@ -27,6 +29,7 @@ class _BaseTextfieldState extends State<BaseTextfield> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final model = context.read<Model>();
     return SizedBox(
       height: widget.height,
       child: TextField(
@@ -69,7 +72,7 @@ class _BaseTextfieldState extends State<BaseTextfield> {
           contentPadding:
               const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
         ),
-        onChanged: (_) => widget.onTap(),
+        onChanged: (_) => model.callNotifyListeners(),
         onTapOutside: (_) => FocusScope.of(context).unfocus(),
       ),
     );

@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:snack_time/features/registration_order.dart/provider/provider.dart';
 
-class AdressDeliveryInfo extends StatelessWidget {
-  const AdressDeliveryInfo({
-    super.key,
-    required this.city,
-    required this.street,
-    required this.onEdit,
-  });
-
-  final String city;
-  final String street;
-  final void Function() onEdit;
+class AddressDeliveryInfo extends StatelessWidget {
+  const AddressDeliveryInfo({super.key});
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final model = context.watch<Model>();
+
+    String street = model.streetController.text;
+    String city = model.cityController.text;
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -46,7 +44,7 @@ class AdressDeliveryInfo extends StatelessWidget {
             color: Colors.red,
             size: 30,
           ),
-          onPressed: () => onEdit(),
+          onPressed: () => model.setIsEdit(),
         )
       ],
     );

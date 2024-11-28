@@ -1,19 +1,20 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:snack_time/features/cart/models/models.dart';
+import 'package:snack_time/features/registration_order.dart/provider/model.dart';
 
-class InputPromocode extends StatefulWidget {
-  const InputPromocode({
+class PromocodeTextfieldWidget extends StatefulWidget {
+  const PromocodeTextfieldWidget({
     super.key,
-    required this.controller,
   });
-  final TextEditingController controller;
 
   @override
-  State<InputPromocode> createState() => _InputPromocodeState();
+  State<PromocodeTextfieldWidget> createState() =>
+      _PromocodeTextfieldWidgetState();
 }
 
-class _InputPromocodeState extends State<InputPromocode> {
+class _PromocodeTextfieldWidgetState extends State<PromocodeTextfieldWidget> {
   List<Promocode> promocodeList = [
     Promocode(title: 'nice', limitUse: 2, discount: 10)
   ];
@@ -21,6 +22,7 @@ class _InputPromocodeState extends State<InputPromocode> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final model = context.read<Model>();
 
     return Container(
       padding: const EdgeInsets.only(top: 15),
@@ -38,7 +40,7 @@ class _InputPromocodeState extends State<InputPromocode> {
             child: TextField(
               maxLength: 20,
               autofocus: false,
-              controller: widget.controller,
+              controller: model.promocodeController,
               cursorColor: theme.primaryColor,
               style: TextStyle(color: Colors.grey.shade600, fontSize: 13),
               decoration: InputDecoration(
@@ -86,7 +88,7 @@ class _InputPromocodeState extends State<InputPromocode> {
                 ),
               ),
             ),
-            onTap: () => _checkPromocode(widget.controller),
+            onTap: () => _checkPromocode(model.promocodeController),
           ),
           const SizedBox(height: 5),
           Flexible(
