@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:snack_time/router/router.gr.dart';
 import 'package:snack_time/ui/shared/widgets/base_container.dart';
 
 @RoutePage()
@@ -109,19 +110,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           const SizedBox(
                             height: 20,
                           ),
-                          Container(
-                            height: 15,
-                            padding: const EdgeInsets.symmetric(horizontal: 5),
-                            decoration: BoxDecoration(
-                              color: const Color.fromARGB(255, 219, 218, 218),
-                              borderRadius: BorderRadius.circular(7),
+                          GestureDetector(
+                            child: Container(
+                              height: 15,
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 5),
+                              decoration: BoxDecoration(
+                                color: const Color.fromARGB(255, 219, 218, 218),
+                                borderRadius: BorderRadius.circular(7),
+                              ),
+                              child: const Text(
+                                '25 ЗАКАЗОВ',
+                                style: TextStyle(
+                                    color: Colors.black, fontSize: 10),
+                              ),
                             ),
-                            child: const Text(
-                              '25 ЗАКАЗОВ',
-                              style:
-                                  TextStyle(color: Colors.black, fontSize: 10),
-                            ),
-                          )
+                            onTap: () => AutoRouter.of(context)
+                                .push(const OrdersListRoute()),
+                          ),
                         ],
                       ),
                     ],

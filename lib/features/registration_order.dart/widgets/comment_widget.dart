@@ -3,8 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:snack_time/features/registration_order.dart/provider/model.dart';
 import 'package:snack_time/features/registration_order.dart/widgets/widgets.dart';
 
-class CommentCardWidget extends StatelessWidget {
-  const CommentCardWidget({super.key});
+class CommentWidget extends StatelessWidget {
+  const CommentWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,28 +21,26 @@ class CommentCardWidget extends StatelessWidget {
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(17), color: Colors.white),
             child: Text(
-              model.comment.isEmpty
-                  ? 'добавить комментарий'
-                  : model.commentController.text,
+              model.comment.isEmpty ? 'добавить комментарий' : model.comment,
               style: TextStyle(
                   color: model.commentController.text.isEmpty
                       ? Theme.of(context).hintColor
                       : Colors.black87),
             ),
           ),
-          onTap: () => _showDialogForComment(context),
+          onTap: () => _showDialogForComment(context, model),
         ),
       ],
     );
   }
 }
 
-void _showDialogForComment(BuildContext context) {
+void _showDialogForComment(BuildContext context, Model model) {
   showModalBottomSheet(
     backgroundColor: Colors.white,
     context: context,
     builder: (context) => ChangeNotifierProvider(
-      create: (context) => Model(),
+      create: (context) => model,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10)
             .copyWith(bottom: MediaQuery.of(context).viewInsets.bottom),
@@ -50,7 +48,7 @@ void _showDialogForComment(BuildContext context) {
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(1), topRight: Radius.circular(1)),
         ),
-        child: const CommentTextfieldWidget(),
+        child: CommentTextfieldWidget(model: model),
       ),
     ),
   );

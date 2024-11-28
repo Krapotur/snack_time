@@ -14,7 +14,10 @@ class Model extends ChangeNotifier {
   String comment = '';
   String descriptionPay = '';
 
-  bool isEdit = false;
+  List<bool> isSelected = [true, false];
+
+  bool isDelivery = false;
+  bool isEdit = true;
   bool isFaster = false;
   bool isTime = false;
 
@@ -31,10 +34,10 @@ class Model extends ChangeNotifier {
     if (isFaster == true) {
       isFaster = false;
     } else {
-      isEdit = false;
       isFaster = true;
       isTime = false;
     }
+    isEdit = false;
     notifyListeners();
   }
 
@@ -42,10 +45,11 @@ class Model extends ChangeNotifier {
     if (isTime == true) {
       isTime = false;
     } else {
-      isEdit = false;
       isFaster = false;
       isTime = true;
     }
+    isEdit = false;
+
     notifyListeners();
   }
 
@@ -62,6 +66,11 @@ class Model extends ChangeNotifier {
       descriptionPay =
           '*Пожалуйста укажите сумму, с которой курьер должен вернуть сдачу';
     }
+    notifyListeners();
+  }
+
+  void setIsSelected(int index) {
+    isSelected[index] = !isSelected[index];
     notifyListeners();
   }
 }

@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
-import 'package:snack_time/features/registration_order.dart/provider/provider.dart';
-// import 'package:shared_preferences/shared_preferences.dart';
 
 class BaseTextfield extends StatefulWidget {
   const BaseTextfield({
@@ -29,10 +26,10 @@ class _BaseTextfieldState extends State<BaseTextfield> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final model = context.read<Model>();
     return SizedBox(
       height: widget.height,
       child: TextField(
+        autofocus: false,
         maxLines: 5,
         maxLength: widget.maxLength,
         keyboardType:
@@ -60,7 +57,7 @@ class _BaseTextfieldState extends State<BaseTextfield> {
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
             borderSide: BorderSide(
-                color: widget.textController!.text.isEmpty
+                color: widget.textController?.text.isEmpty ?? true
                     ? Colors.red
                     : Colors.grey.shade100,
                 width: 1.0),
@@ -72,16 +69,13 @@ class _BaseTextfieldState extends State<BaseTextfield> {
           contentPadding:
               const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
         ),
-        onChanged: (_) => model.callNotifyListeners(),
+        onChanged: (value) {
+          if (value.length > 5) {
+            widget.onTap();
+          }
+        },
         onTapOutside: (_) => FocusScope.of(context).unfocus(),
       ),
     );
   }
-
-  // void _setValueVisibleKeyboard(bool visible) async {
-  //   final prefs = await SharedPreferences.getInstance();
-  //   prefs.setBool('isVisible', visible);
-
-  //   widget.callSetState();
-  // }
 }

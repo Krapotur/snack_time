@@ -1,17 +1,18 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:snack_time/features/registration_order.dart/provider/provider.dart';
 import 'package:snack_time/ui/shared/widgets/base_textfield.dart';
 
 class CommentTextfieldWidget extends StatelessWidget {
   const CommentTextfieldWidget({
     super.key,
+    required this.model,
   });
+
+  final Model model;
 
   @override
   Widget build(BuildContext context) {
-    final model = context.read<Model>();
     final theme = Theme.of(context);
     return Stack(
       alignment: AlignmentDirectional.topEnd,
@@ -47,6 +48,7 @@ class CommentTextfieldWidget extends StatelessWidget {
               onTap: () {
                 model.commentUpdate();
                 AutoRouter.of(context).maybePop();
+                FocusScope.of(context).unfocus();
               },
             ),
             const SizedBox(height: 15),

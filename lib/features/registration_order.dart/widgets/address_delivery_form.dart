@@ -25,22 +25,24 @@ class AddressDeliveryForm extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                Column(
-                  children: [
-                    const DropMenuCities(),
-                    const SizedBox(height: 10),
-                    model.cityController.text.isNotEmpty
-                        ? BaseTextfield(
-                            textController: model.streetController,
-                            hintText: 'Улица, дом, квартира',
-                            height: 45,
-                            maxLength: 40,
-                            isNumber: false,
-                            onTap: () {},
-                          )
-                        : const SizedBox.shrink(),
-                  ],
-                ),
+                model.isEdit == true
+                    ? Column(
+                        children: [
+                          const DropMenuCities(),
+                          const SizedBox(height: 10),
+                          model.cityController.text.isNotEmpty
+                              ? BaseTextfield(
+                                  textController: model.streetController,
+                                  hintText: 'Улица, дом, квартира',
+                                  height: 45,
+                                  maxLength: 40,
+                                  isNumber: false,
+                                  onTap: () => model.setIsEdit(),
+                                )
+                              : const SizedBox.shrink(),
+                        ],
+                      )
+                    : const SizedBox.shrink(),
                 const SizedBox(height: 5),
                 model.cityController.text.isNotEmpty &&
                         model.streetController.text.isNotEmpty

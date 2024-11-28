@@ -12,5 +12,6 @@ class AppRouter extends RootStackRouter {
         AutoRoute(path: '/cart', page: CartRoute.page),
         AutoRoute(
             path: '/registration-order', page: RegistrationOrderRoute.page),
+        AutoRoute(path: '/order-list', page: OrdersListRoute.page),
       ];
 }

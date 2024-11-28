@@ -32,9 +32,18 @@ class PositionsScreenState extends State<PositionsScreen> {
         child: CustomScrollView(
           slivers: [
             SliverAppBar.medium(
-              title: Text(
-                'ITALIANO R&K',
-                style: TextStyle(color: Theme.of(context).primaryColor),
+              title: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    'ITALIANO ',
+                    style: TextStyle(color: Theme.of(context).primaryColor),
+                  ),
+                  const Text(
+                    'R&K',
+                    style: TextStyle(color: Colors.red),
+                  ),
+                ],
               ),
               surfaceTintColor: Colors.white,
               automaticallyImplyLeading: false,
