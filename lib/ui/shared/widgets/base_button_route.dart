@@ -35,15 +35,11 @@ class BaseButtonRoute extends StatelessWidget {
                   children: [
                     Text(title),
                     subTitle.isNotEmpty
-                        ? Text(
-                            subTitle,
-                            style: theme.textTheme.labelSmall
-                                
-                          )
-                        : SizedBox.shrink(),
+                        ? Text(subTitle, style: theme.textTheme.labelSmall)
+                        : const SizedBox.shrink(),
                   ],
                 ),
-                Icon(
+                const Icon(
                   Icons.arrow_right,
                   color: Colors.grey,
                 ),

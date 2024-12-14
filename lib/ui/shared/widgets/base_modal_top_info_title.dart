@@ -19,13 +19,13 @@ class BaseModalTopInfoTitle extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              SizedBox(width: 30),
+              const SizedBox(width: 30),
               Padding(
                 padding: const EdgeInsets.only(top: 10.0),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       width: 50,
                       child: Divider(
                         height: 3,
@@ -33,10 +33,10 @@ class BaseModalTopInfoTitle extends StatelessWidget {
                         color: Colors.black26,
                       ),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Container(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 30, vertical: 5),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 30, vertical: 5),
                       decoration: BoxDecoration(
                         color: _getColor(context, status),
                         borderRadius: BorderRadius.circular(20),
@@ -45,7 +45,8 @@ class BaseModalTopInfoTitle extends StatelessWidget {
                             color: Colors.grey.withOpacity(0.5),
                             spreadRadius: 1,
                             blurRadius: 2,
-                            offset: Offset(0, 1), // changes position of shadow
+                            offset: const Offset(
+                                0, 1), // changes position of shadow
                           ),
                         ],
                       ),
@@ -53,8 +54,8 @@ class BaseModalTopInfoTitle extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(title,
-                              style:
-                                  TextStyle(fontSize: 20, color: Colors.white)),
+                              style: const TextStyle(
+                                  fontSize: 20, color: Colors.white)),
                           Text('(${_getStatusLocalRu(status).toLowerCase()})')
                         ],
                       ),
@@ -89,7 +90,7 @@ class BaseModalTopInfoTitle extends StatelessWidget {
       case 'check-out-in':
         color = Colors.red;
       case 'req-quest':
-        color = Color.fromARGB(255, 188, 188, 2);
+        color = const Color.fromARGB(255, 188, 188, 2);
       case 'cleaning':
         color = Colors.green;
       default:
