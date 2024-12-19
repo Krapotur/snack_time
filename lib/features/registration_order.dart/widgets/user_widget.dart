@@ -3,9 +3,14 @@ import 'package:provider/provider.dart';
 import 'package:snack_time/features/registration_order.dart/provider/provider.dart';
 import 'package:snack_time/ui/shared/widgets/base_textfield.dart';
 
-class UserWidget extends StatelessWidget {
+class UserWidget extends StatefulWidget {
   const UserWidget({super.key});
 
+  @override
+  State<UserWidget> createState() => _UserWidgetState();
+}
+
+class _UserWidgetState extends State<UserWidget> {
   @override
   Widget build(BuildContext context) {
     final model = context.read<Model>();

@@ -4,11 +4,16 @@ import 'package:snack_time/features/registration_order.dart/provider/provider.da
 import 'package:snack_time/features/registration_order.dart/widgets/widgets.dart';
 import 'package:snack_time/ui/shared/widgets/widgets.dart';
 
-class AddressDeliveryForm extends StatelessWidget {
+class AddressDeliveryForm extends StatefulWidget {
   const AddressDeliveryForm({
     super.key,
   });
 
+  @override
+  State<AddressDeliveryForm> createState() => _AddressDeliveryFormState();
+}
+
+class _AddressDeliveryFormState extends State<AddressDeliveryForm> {
   @override
   Widget build(BuildContext context) {
     final model = context.watch<Model>();

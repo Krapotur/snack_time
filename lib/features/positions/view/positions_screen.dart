@@ -50,16 +50,16 @@ class PositionsScreenState extends State<PositionsScreen> {
               centerTitle: true,
               backgroundColor: Colors.white,
             ),
-            const SliverToBoxAdapter(
-              child: Padding(
-                padding: EdgeInsets.only(top: 5, left: 10.0),
-                child: Text(
-                  'Акции',
-                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400),
-                ),
-              ),
-            ),
-            const EventsWidget(),
+            // const SliverToBoxAdapter(
+            //   child: Padding(
+            //     padding: EdgeInsets.only(top: 5, left: 10.0),
+            //     child: Text(
+            //       'Акции',
+            //       style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400),
+            //     ),
+            //   ),
+            // ),
+            // const EventsWidget(),
             const SliverToBoxAdapter(
               child: Padding(
                 padding: EdgeInsets.only(top: 5, left: 10.0),

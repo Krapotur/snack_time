@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:snack_time/repositories/models.dart';
@@ -19,7 +18,6 @@ class PositionListBloc extends Bloc<PositionListEvent, PositionListState> {
         final categories = await categoriesRepository.getCategoriesList();
         final positions = await positionsRepository.getPositionsList(
             categoryID: categories[0].id);
-        log(positions.toString());
 
         emit(PositionListLoaded(
             positionsList: positions, categoriesList: categories));

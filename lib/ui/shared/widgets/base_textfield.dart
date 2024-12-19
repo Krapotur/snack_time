@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class BaseTextfield extends StatefulWidget {
-  const BaseTextfield({
-    super.key,
-    required this.textController,
-    required this.hintText,
-    required this.onTap,
-    required this.height,
-    required this.maxLength,
-    required this.isNumber,
-  });
+  const BaseTextfield(
+      {super.key,
+      required this.textController,
+      required this.hintText,
+      required this.onTap,
+      required this.height,
+      required this.maxLength,
+      required this.isNumber});
+
   final TextEditingController? textController;
   final String hintText;
   final double height;
@@ -29,7 +29,6 @@ class _BaseTextfieldState extends State<BaseTextfield> {
     return SizedBox(
       height: widget.height,
       child: TextField(
-        autofocus: false,
         maxLines: 5,
         maxLength: widget.maxLength,
         keyboardType:
@@ -56,11 +55,7 @@ class _BaseTextfieldState extends State<BaseTextfield> {
           border: const OutlineInputBorder(),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(
-                color: widget.textController?.text.isEmpty ?? true
-                    ? Colors.red
-                    : Colors.grey.shade100,
-                width: 1.0),
+            borderSide: BorderSide(color: Colors.grey.shade100, width: 1.0),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
@@ -74,7 +69,7 @@ class _BaseTextfieldState extends State<BaseTextfield> {
             widget.onTap();
           }
         },
-        onTapOutside: (_) => FocusScope.of(context).unfocus(),
+        onTapOutside: (_) => FocusManager.instance.primaryFocus?.unfocus(),
       ),
     );
   }

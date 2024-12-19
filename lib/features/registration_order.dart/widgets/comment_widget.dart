@@ -19,7 +19,7 @@ class CommentWidget extends StatelessWidget {
             width: double.infinity,
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(17), color: Colors.white),
+                borderRadius: BorderRadius.circular(10), color: Colors.white),
             child: Text(
               model.comment.isEmpty ? 'добавить комментарий' : model.comment,
               style: TextStyle(
@@ -42,7 +42,8 @@ void _showDialogForComment(BuildContext context, Model model) {
     builder: (context) => ChangeNotifierProvider(
       create: (context) => model,
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10)
+        width: double.infinity,
+        padding: const EdgeInsets.symmetric(horizontal: 10.0)
             .copyWith(bottom: MediaQuery.of(context).viewInsets.bottom),
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.only(

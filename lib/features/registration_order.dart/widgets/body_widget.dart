@@ -21,11 +21,13 @@ class BodyWidget extends StatelessWidget {
           const ToggleChangeMethodOrder(),
           const SizedBox(height: 10),
           model.isSelected[1] == true
-              ? const Column(
+              ? Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    AddressDeliveryForm(),
-                    DropMenuChangePay(),
+                    const AddressDeliveryForm(),
+                    model.isFaster == true || model.isTime
+                        ? const DropMenuChangePay()
+                        : const SizedBox.shrink(),
                   ],
                 )
               : const SizedBox.shrink(),

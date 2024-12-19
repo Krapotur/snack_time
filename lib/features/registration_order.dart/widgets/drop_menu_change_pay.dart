@@ -3,10 +3,29 @@ import 'package:provider/provider.dart';
 import 'package:snack_time/features/registration_order.dart/provider/provider.dart';
 import 'package:snack_time/ui/shared/widgets/base_textfield.dart';
 
-class DropMenuChangePay extends StatelessWidget {
+class DropMenuChangePay extends StatefulWidget {
   const DropMenuChangePay({
     super.key,
   });
+
+  @override
+  State<DropMenuChangePay> createState() => _DropMenuChangePayState();
+}
+
+class _DropMenuChangePayState extends State<DropMenuChangePay> {
+  late FocusNode myFocusNode;
+
+  @override
+  void initState() {
+    myFocusNode = FocusNode();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    myFocusNode.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

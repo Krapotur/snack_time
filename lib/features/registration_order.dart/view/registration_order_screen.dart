@@ -21,6 +21,13 @@ class _RegistrationOrderScreenState extends State<RegistrationOrderScreen> {
   bool isRestaurant = false;
   bool isDelivery = false;
 
+  // @override
+  // void initState() {
+  //   // TODO: implement initState
+  //   super.initState();
+  //   getTime();
+  // }
+
   @override
   Widget build(BuildContext context) => ChangeNotifierProvider(
         create: (context) => Model(),
@@ -46,3 +53,34 @@ class _RegistrationOrderScreenState extends State<RegistrationOrderScreen> {
         ),
       );
 }
+
+// void getTime() {
+//   String startTime = '10:00';
+//   String endTime = '24:00';
+
+//   int hourStart = int.parse(startTime.substring(0, 2));
+//   int minStart = int.parse(startTime.substring(3, 5));
+//   int hourEnd = int.parse(endTime.substring(0, 2));
+//   String min = '00';
+//   String minRange = '30';
+
+//   List<String> timeList = [];
+//   int count = 0;
+//   for (var time = hourStart;
+//       time < hourEnd;
+//       int.parse(minRange) == 30 ? time++ : time += 0) {
+//     String newTime = '$time:$min - $time:$minRange';
+//     if (count == 3) {
+//       count = 0;
+//     }
+//     if (min == '30') {
+//       min = '00';
+//       minRange = '30';
+//     } else {
+//       min = '30';
+//       minRange = '00';
+//     }
+//     count++;
+//     log(newTime);
+//   }
+// }

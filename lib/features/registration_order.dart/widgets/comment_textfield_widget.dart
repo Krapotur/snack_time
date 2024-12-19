@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:snack_time/features/registration_order.dart/provider/provider.dart';
 import 'package:snack_time/ui/shared/widgets/base_textfield.dart';
 
-class CommentTextfieldWidget extends StatelessWidget {
+class CommentTextfieldWidget extends StatefulWidget {
   const CommentTextfieldWidget({
     super.key,
     required this.model,
@@ -12,58 +12,68 @@ class CommentTextfieldWidget extends StatelessWidget {
   final Model model;
 
   @override
+  State<CommentTextfieldWidget> createState() => _CommentTextfieldWidgetState();
+}
+
+class _CommentTextfieldWidgetState extends State<CommentTextfieldWidget> {
+  @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Stack(
-      alignment: AlignmentDirectional.topEnd,
       children: [
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            const SizedBox(height: 25),
-            BaseTextfield(
-              textController: model.commentController,
-              hintText: 'Ваш комментарий...',
-              height: 60,
-              maxLength: 150,
-              isNumber: false,
-              onTap: () => model.callNotifyListeners(),
+            const SizedBox(height: 20),
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Expanded(
+                  child: BaseTextfield(
+                    textController: widget.model.commentController,
+                    hintText: 'Ваш комментарий...',
+                    height: 60,
+                    maxLength: 150,
+                    isNumber: false,
+                    onTap: widget.model.callNotifyListeners,
+                  ),
+                ),
+                widget.model.commentController.text.isNotEmpty
+                    ? IconButton(
+                        icon: const Icon(Icons.delete),
+                        onPressed: widget.model.commentController.clear,
+                      )
+                    : const SizedBox.shrink()
+              ],
             ),
             const SizedBox(height: 10),
             GestureDetector(
               child: Container(
-                height: 35,
-                padding: const EdgeInsets.symmetric(horizontal: 15),
+                padding: const EdgeInsets.symmetric(vertical: 10),
                 decoration: BoxDecoration(
                     color: theme.primaryColor,
                     borderRadius: BorderRadiusDirectional.circular(10)),
                 child: const Center(
                   child: Text(
                     'Сохранить',
-                    style: TextStyle(color: Colors.white, fontSize: 12),
+                    style: TextStyle(color: Colors.white, fontSize: 15),
                   ),
                 ),
               ),
               onTap: () {
-                model.commentUpdate();
+                widget.model.commentUpdate();
                 AutoRouter.of(context).maybePop();
-                FocusScope.of(context).unfocus();
               },
             ),
             const SizedBox(height: 15),
           ],
         ),
-        GestureDetector(
-          child: Container(
-            padding: const EdgeInsets.all(3),
-            decoration: BoxDecoration(
-                color: theme.primaryColor,
-                borderRadius: BorderRadius.circular(30)),
-            child: const Icon(Icons.close, size: 15, color: Colors.white),
-          ),
-          onTap: () => AutoRouter.of(context).maybePop(),
-        ),
+        const Divider(
+          indent: 160,
+          endIndent: 160,
+          thickness: 3,
+        )
       ],
     );
   }
