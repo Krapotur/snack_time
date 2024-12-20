@@ -13,6 +13,7 @@ class RegOrderModel extends ChangeNotifier {
 
   String comment = '';
   String descriptionPay = '';
+  String dateTime = '';
 
   List<bool> isSelected = [true, false];
   List<String> timeList = [
@@ -109,6 +110,11 @@ class RegOrderModel extends ChangeNotifier {
   void setSelectTime(int index) {
     isSelectTime = !isSelectTime;
     selectedTime = timeList[index];
+    notifyListeners();
+  }
+
+  void setTime(String dateTime) {
+    this.dateTime = dateTime;
     notifyListeners();
   }
 }

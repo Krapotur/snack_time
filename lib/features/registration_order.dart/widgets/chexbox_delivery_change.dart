@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:snack_time/features/registration_order.dart/provider/reg_order_model.dart';
+import 'package:snack_time/features/registration_order.dart/widgets/widgets.dart';
 
 class ChexboxDeliveryChange extends StatefulWidget {
   const ChexboxDeliveryChange({
@@ -55,35 +56,36 @@ class _ChexboxDeliveryChangeState extends State<ChexboxDeliveryChange> {
           ),
         ),
         model.isTime == true
-            ? SizedBox(
-                height: 60,
-                child: CarouselView(
-                  shrinkExtent: 100,
-                  itemExtent: 150,
-                  scrollDirection: Axis.horizontal,
-                  children: List<Widget>.generate(
-                    model.timeList.length,
-                    (int index) {
-                      return Container(
-                        color: model.selectedTime == model.timeList[index]
-                            ? theme.primaryColor
-                            : theme.highlightColor,
-                        child: Center(
-                          child: Text(
-                            model.timeList[index],
-                            style: TextStyle(
-                              color: model.selectedTime == model.timeList[index]
-                                  ? theme.highlightColor
-                                  : Colors.black87,
-                            ),
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                  onTap: (time) => model.setSelectTime(time),
-                ),
-              )
+            ? const DatePickerWidget()
+            //  SizedBox(
+            //     height: 60,
+            //     child: CarouselView(
+            //       shrinkExtent: 100,
+            //       itemExtent: 150,
+            //       scrollDirection: Axis.horizontal,
+            //       children: List<Widget>.generate(
+            //         model.timeList.length,
+            //         (int index) {
+            //           return Container(
+            //             color: model.selectedTime == model.timeList[index]
+            //                 ? theme.primaryColor
+            //                 : theme.highlightColor,
+            //             child: Center(
+            //               child: Text(
+            //                 model.timeList[index],
+            //                 style: TextStyle(
+            //                   color: model.selectedTime == model.timeList[index]
+            //                       ? theme.highlightColor
+            //                       : Colors.black87,
+            //                 ),
+            //               ),
+            //             ),
+            //           );
+            //         },
+            //       ),
+            //       onTap: (time) => model.setSelectTime(time),
+            //     ),
+            //   )
             : const SizedBox.shrink(),
       ],
     );

@@ -1,15 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:snack_time/features/registration_order.dart/provider/reg_order_model.dart';
 import 'package:snack_time/features/registration_order.dart/widgets/widgets.dart';
 
-class BodyWidget extends StatelessWidget {
+class BodyWidget extends StatefulWidget {
   const BodyWidget({
     super.key,
   });
 
+  @override
+  State<BodyWidget> createState() => _BodyWidgetState();
+}
+
+class _BodyWidgetState extends State<BodyWidget> {
   @override
   Widget build(BuildContext context) {
     final model = context.watch<RegOrderModel>();
@@ -37,22 +41,13 @@ class BodyWidget extends StatelessWidget {
               ? const SizedBox(height: 20)
               : const SizedBox.shrink(),
           const UserWidget(),
-          const SizedBox(height: 20),
-          GestureDetector(
-            child: const Text('Выбрать дату'),
-            onTap: () => CupertinoRoundedDatePicker.show(
-              context,
-              fontFamily: "Mali",
-              textColor: Colors.white,
-              background: Theme.of(context).primaryColor,
-              borderRadius: 16,
-              initialDatePickerMode: CupertinoDatePickerMode.date,
-              onDateTimeChanged: (newDateTime) {
-                //
-              },
-            ),
-          ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 10),
+          model.isSelected[0] == true
+              ? const DatePickerWidget()
+              : const SizedBox.shrink(),
+          model.dateTime.isNotEmpty
+              ? const SizedBox(height: 10)
+              : const SizedBox.shrink(),
           const CommentWidget(),
           const SizedBox(height: 30),
         ],
