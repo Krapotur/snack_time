@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:snack_time/features/registration_order.dart/provider/provider.dart';
+import 'package:snack_time/features/registration_order.dart/provider/reg_order_model.dart';
 
 class DropMenuCities extends StatelessWidget {
   const DropMenuCities({
@@ -9,7 +9,7 @@ class DropMenuCities extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final model = context.read<Model>();
+    final model = context.read<RegOrderModel>();
     return DropdownMenu(
       expandedInsets: const EdgeInsets.all(2),
       label: const Text('Город', style: TextStyle(fontSize: 15)),

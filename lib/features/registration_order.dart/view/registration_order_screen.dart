@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:snack_time/features/cart/widgets/widgets.dart';
-import 'package:snack_time/features/registration_order.dart/provider/provider.dart';
+import 'package:snack_time/features/registration_order.dart/provider/reg_order_model.dart';
 import 'package:snack_time/features/registration_order.dart/widgets/widgets.dart';
 import 'package:snack_time/repositories/models.dart';
 
@@ -21,16 +21,9 @@ class _RegistrationOrderScreenState extends State<RegistrationOrderScreen> {
   bool isRestaurant = false;
   bool isDelivery = false;
 
-  // @override
-  // void initState() {
-  //   // TODO: implement initState
-  //   super.initState();
-  //   getTime();
-  // }
-
   @override
   Widget build(BuildContext context) => ChangeNotifierProvider(
-        create: (context) => Model(),
+        create: (context) => RegOrderModel(),
         child: Scaffold(
           appBar: AppBar(
             title: const Text(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:snack_time/features/registration_order.dart/provider/provider.dart';
+import 'package:snack_time/features/registration_order.dart/provider/reg_order_model.dart';
 import 'package:snack_time/features/registration_order.dart/widgets/widgets.dart';
 import 'package:snack_time/ui/shared/widgets/widgets.dart';
 
@@ -16,7 +16,7 @@ class AddressDeliveryForm extends StatefulWidget {
 class _AddressDeliveryFormState extends State<AddressDeliveryForm> {
   @override
   Widget build(BuildContext context) {
-    final model = context.watch<Model>();
+    final model = context.watch<RegOrderModel>();
 
     return Column(
       mainAxisSize: MainAxisSize.min,

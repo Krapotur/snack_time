@@ -61,7 +61,7 @@ class RowPriceAndQuantity extends StatelessWidget {
                     return GestureDetector(
                       child: Container(
                           margin: const EdgeInsets.symmetric(horizontal: 7),
-                          padding: const EdgeInsets.all(3),
+                          padding: const EdgeInsets.all(4),
                           decoration: BoxDecoration(
                               color: theme.primaryColor,
                               borderRadius:

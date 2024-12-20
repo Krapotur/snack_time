@@ -30,6 +30,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter  
   dio: ^5.7.0
   cupertino_icons: ^1.0.2
   auto_route: ^9.2.2
@@ -42,6 +44,8 @@ dependencies:
   json_annotation: ^4.9.0
   flutter_dotenv: ^5.2.1
   provider: ^6.1.2
+  
+  flutter_rounded_date_picker: ^3.0.4
   
 dev_dependencies:
   flutter_test:

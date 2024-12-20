@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:snack_time/features/registration_order.dart/provider/provider.dart';
+import 'package:snack_time/features/registration_order.dart/provider/reg_order_model.dart';
 
 class ChexboxDeliveryChange extends StatefulWidget {
   const ChexboxDeliveryChange({
@@ -15,7 +15,7 @@ class _ChexboxDeliveryChangeState extends State<ChexboxDeliveryChange> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final model = context.watch<Model>();
+    final model = context.watch<RegOrderModel>();
 
     return Column(
       mainAxisSize: MainAxisSize.min,

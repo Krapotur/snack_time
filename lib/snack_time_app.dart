@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:snack_time/features/cart/bloc/cart_bloc.dart';
 import 'package:snack_time/features/positions/bloc/position_list_bloc.dart';
 import 'package:snack_time/repositories/repositories.dart';
@@ -33,6 +35,17 @@ class SnackTimeApp extends StatelessWidget {
           ),
         ],
         child: MaterialApp.router(
+          localizationsDelegates: const [
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            DefaultCupertinoLocalizations.delegate,
+            GlobalCupertinoLocalizations
+                .delegate, // Add global cupertino localiztions.
+          ],
+          locale: const Locale('ru', 'RU'), // Current locale
+          supportedLocales: const [
+            Locale('ru', 'RU'), // English
+          ],
           theme: primaryTheme,
           debugShowCheckedModeBanner: false,
           routerConfig: appRouter.config(),

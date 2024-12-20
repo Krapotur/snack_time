@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:snack_time/features/cart/models/models.dart';
-import 'package:snack_time/features/registration_order.dart/provider/model.dart';
+import 'package:snack_time/features/registration_order.dart/provider/reg_order_model.dart';
 
 class PromocodeTextfieldWidget extends StatefulWidget {
   const PromocodeTextfieldWidget({
@@ -22,7 +22,7 @@ class _PromocodeTextfieldWidgetState extends State<PromocodeTextfieldWidget> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final model = context.read<Model>();
+    final model = context.read<RegOrderModel>();
 
     return Container(
       padding: const EdgeInsets.only(top: 15),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:snack_time/features/registration_order.dart/provider/provider.dart';
+import 'package:snack_time/features/registration_order.dart/provider/reg_order_model.dart';
 import 'package:snack_time/ui/shared/widgets/base_textfield.dart';
 
 class UserWidget extends StatefulWidget {
@@ -13,12 +13,12 @@ class UserWidget extends StatefulWidget {
 class _UserWidgetState extends State<UserWidget> {
   @override
   Widget build(BuildContext context) {
-    final model = context.read<Model>();
+    final model = context.read<RegOrderModel>();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
       children: [
         const Text(' Получатель:'),
-        const SizedBox(height: 5),
         Card(
           child: Padding(
             padding: const EdgeInsets.all(15),

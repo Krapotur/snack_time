@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:snack_time/features/registration_order.dart/provider/provider.dart';
+import 'package:snack_time/features/registration_order.dart/provider/reg_order_model.dart';
 import 'package:snack_time/ui/shared/widgets/base_textfield.dart';
 
 class DropMenuChangePay extends StatefulWidget {
@@ -29,7 +29,7 @@ class _DropMenuChangePayState extends State<DropMenuChangePay> {
 
   @override
   Widget build(BuildContext context) {
-    final model = context.watch<Model>();
+    final model = context.watch<RegOrderModel>();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

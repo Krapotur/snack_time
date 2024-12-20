@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:snack_time/features/registration_order.dart/provider/provider.dart';
+import 'package:snack_time/features/registration_order.dart/provider/reg_order_model.dart';
 
 class ToggleChangeMethodOrder extends StatelessWidget {
   const ToggleChangeMethodOrder({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final model = context.watch<Model>();
+    final model = context.watch<RegOrderModel>();
 
     return Center(
       child: ToggleButtons(

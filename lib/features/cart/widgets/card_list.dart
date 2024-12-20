@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:snack_time/features/cart/widgets/widgets.dart';
+import 'package:snack_time/features/registration_order.dart/widgets/widgets.dart';
 import 'package:snack_time/repositories/positions/model/position.dart';
 
 class CardsList extends StatelessWidget {
@@ -30,7 +31,9 @@ class CardsList extends StatelessWidget {
               ),
             ),
             const SliverToBoxAdapter(child: SizedBox(height: 2)),
-            // const InfoAbotDelivery(),
+            const SliverToBoxAdapter(
+              child: PromocodeWidget(),
+            )
           ],
         ),
       ),

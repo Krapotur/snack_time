@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class Model extends ChangeNotifier {
+class RegOrderModel extends ChangeNotifier {
   final TextEditingController cityController = TextEditingController();
   final TextEditingController streetController = TextEditingController();
   final TextEditingController commentController = TextEditingController();

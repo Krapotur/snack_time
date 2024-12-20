@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:snack_time/features/registration_order.dart/provider/model.dart';
+import 'package:snack_time/features/registration_order.dart/provider/reg_order_model.dart';
 import 'package:snack_time/features/registration_order.dart/widgets/widgets.dart';
 
 class CommentWidget extends StatelessWidget {
@@ -8,24 +8,22 @@ class CommentWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final model = context.watch<Model>();
+    final model = context.watch<RegOrderModel>();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
       children: [
         const Text(' Комментарий к заказу:'),
-        const SizedBox(height: 3),
         GestureDetector(
           child: Container(
+            height: 60,
             width: double.infinity,
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10), color: Colors.white),
             child: Text(
-              model.comment.isEmpty ? 'добавить комментарий' : model.comment,
-              style: TextStyle(
-                  color: model.commentController.text.isEmpty
-                      ? Theme.of(context).hintColor
-                      : Colors.black87),
+              model.comment.isEmpty ? 'добавить комментарий...' : model.comment,
+              style: TextStyle(color: Theme.of(context).hintColor),
             ),
           ),
           onTap: () => _showDialogForComment(context, model),
@@ -35,7 +33,7 @@ class CommentWidget extends StatelessWidget {
   }
 }
 
-void _showDialogForComment(BuildContext context, Model model) {
+void _showDialogForComment(BuildContext context, RegOrderModel model) {
   showModalBottomSheet(
     backgroundColor: Colors.white,
     context: context,

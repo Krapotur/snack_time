@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:snack_time/features/registration_order.dart/provider/provider.dart';
+import 'package:snack_time/features/registration_order.dart/provider/reg_order_model.dart';
 import 'package:snack_time/ui/shared/widgets/base_textfield.dart';
 
 class CommentTextfieldWidget extends StatefulWidget {
@@ -9,7 +9,7 @@ class CommentTextfieldWidget extends StatefulWidget {
     required this.model,
   });
 
-  final Model model;
+  final RegOrderModel model;
 
   @override
   State<CommentTextfieldWidget> createState() => _CommentTextfieldWidgetState();

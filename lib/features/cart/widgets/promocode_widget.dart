@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:snack_time/features/cart/widgets/widgets.dart';
-import 'package:snack_time/features/registration_order.dart/provider/model.dart';
+import 'package:snack_time/features/registration_order.dart/provider/reg_order_model.dart';
 
 class PromocodeWidget extends StatelessWidget {
   const PromocodeWidget({
@@ -32,7 +32,7 @@ void _showDialogForPromocode(BuildContext context) {
   showDialog(
     context: context,
     builder: (context) => ChangeNotifierProvider(
-      create: (context) => Model(),
+      create: (context) => RegOrderModel(),
       child: AlertDialog(
         backgroundColor: Colors.white,
         surfaceTintColor: Colors.white,
